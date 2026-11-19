@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0A0412" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Stiti.id — Kawal Stabilitas 4 Amplop Berdua</title>
+
+  <!-- Favicon SVG Huruf S Tunggal Tanpa Latar Belakang (Ungu Magenta & Hijau Neon) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23E11D8F'/%3E%3Cstop offset='100%25' stop-color='%239333EA'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2325F91C'/%3E%3Cstop offset='100%25' stop-color='%2316A34A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M46 14H24C17.37 14 12 19.37 12 26C12 31.5 15.8 36 21 37.5L36 41.5' fill='none' stroke='url(%23g1)' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M18 50H40C46.63 50 52 44.63 52 38C52 32.5 48.2 28 43 26.5L28 22.5' fill='none' stroke='url(%23g2)' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Bricolage Grotesque (Unik & Ekspresif) + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SheetJS CDN untuk Export Laporan Excel (.xlsx) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            void: '#0A0412',
+            surface: '#150B24',
+            surfaceLight: '#211238',
+            borderDiametric: '#381E5C',
+            magenta: '#E11D8F',
+            purpleVivid: '#A855F7',
+            neon: '#25F91C',
+            neonDim: '#1BC914',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-void: #0A0412;
+      --bg-surface: #150B24;
+      --magenta: #E11D8F;
+      --purple: #A855F7;
+      --neon: #25F91C;
+    }
+    body {
+      background-color: var(--bg-void);
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    .font-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    /* Efek Gradien Diametral ala FSTVLST Paradoks Diametral */
+    .diametric-card {
+      background: linear-gradient(145deg, rgba(21, 11, 36, 0.95) 0%, rgba(33, 18, 56, 0.85) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.28);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+    }
+    .diametric-border-glow {
+      position: relative;
+      background: #150B24;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+    }
+    .diametric-border-glow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      margin: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #E11D8F 0%, #9333EA 50%, #25F91C 100%);
+    }
+    .btn-neon-pill {
+      background: linear-gradient(135deg, #25F91C 0%, #1ED760 100%);
+      color: #0A0412;
+      box-shadow: 0 6px 22px rgba(37, 249, 28, 0.32);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-neon-pill:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 10px 28px rgba(37, 249, 28, 0.45);
+    }
+    .btn-neon-pill:active {
+      transform: scale(0.96);
+    }
+    .btn-magenta-pill {
+      background: linear-gradient(135deg, #E11D8F 0%, #9333EA 100%);
+      color: #FFFFFF;
+      box-shadow: 0 6px 20px rgba(225, 29, 143, 0.32);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-magenta-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(225, 29, 143, 0.48);
+    }
+    .btn-magenta-pill:active {
+      transform: scale(0.96);
+    }
+    .tactile-btn {
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .tactile-btn:active {
+      transform: scale(0.95);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #0A0412; }
+    ::-webkit-scrollbar-thumb { background: #381E5C; border-radius: 999px; }
+  </style>
+</head>
+<body class="min-h-screen bg-void text-slate-100 selection:bg-neon selection:text-void">
+
+  <!-- DEKORASI AMBIENT DIAMETRAL (UNGU MAGENTA & HIJAU NEON) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-magenta/15 blur-[110px]"></div>
+    <div class="absolute top-1/3 -right-32 w-80 h-80 rounded-full bg-neon/10 blur-[120px]"></div>
+    <div class="absolute -bottom-32 left-1/4 w-96 h-96 rounded-full bg-purpleVivid/15 blur-[120px]"></div>
+  </div>
+
+  <!-- TOAST NOTIFIKASI -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden max-w-[92%] w-max px-5 py-3 rounded-full bg-surfaceLight/95 backdrop-blur-md border border-neon text-xs font-bold text-white shadow-2xl transition-all">
+    <span id="toast-msg">Notifikasi</span>
+  </div>
+
+  <!-- CONTAINER UTAMA ADAPTIF (HP & LAPTOP) -->
+  <div id="app-root" class="relative z-10 min-h-screen flex flex-col">
+
+    <!-- ===================================================================== -->
+    <!-- GERBANG 1: HALAMAN DAFTAR & LOGIN (RESPONSIF HP & LAPTOP)             -->
+    <!-- ===================================================================== -->
+    <section id="screen-auth" class="flex-1 flex items-center justify-center p-5 md:p-10">
+      <div class="w-full max-w-md md:max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+        <!-- Kolom Kiri (Brand & Visual Diametral) -->
+        <div class="md:col-span-6 p-4 md:p-6">
+          <div class="flex items-center gap-4 mb-5">
+            <!-- LOGO HURUF S SAJA TANPA LATAR BELAKANG (HIJAU & UNGU MAGENTA) -->
+            <svg class="w-14 h-14 shrink-0 drop-shadow-[0_0_16px_rgba(225,29,143,0.45)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoPurpleAuth" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#E11D8F"/>
+                  <stop offset="100%" stop-color="#9333EA"/>
+                </linearGradient>
+                <linearGradient id="logoGreenAuth" x1="18" y1="26" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#25F91C"/>
+                  <stop offset="100%" stop-color="#15803D"/>
+                </linearGradient>
+              </defs>
+              <path d="M47 14H25C17.8203 14 12 19.8203 12 27C12 32.8 15.8 37.7 21.2 39.3L37 43.8" stroke="url(#logoPurpleAuth)" stroke-width="8.5" stroke-linecap="round"/>
+              <path d="M17 50H39C46.1797 50 52 44.1797 52 37C52 31.2 48.2 26.3 42.8 24.7L27 20.2" stroke="url(#logoGreenAuth)" stroke-width="8.5" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-none">
+                Stiti<span class="text-neon">.id</span>
+              </h1>
+              <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded-full bg-magenta/20 border border-magenta/40 text-[11px] font-bold text-pink-300">
+                Paradoks Disiplin & Kebebasan Finansial
+              </span>
+            </div>
+          </div>
+
+          <p class="text-sm md:text-base text-slate-300 leading-relaxed mb-5">
+            Atur uang saku secara terukur dengan <strong class="text-neon">Model Hibrida 4 Amplop</strong>. Pantau ritme pengeluaran bersama teman tanpa kehilangan privasi.
+          </p>
+
+          <div class="hidden md:grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3.5 rounded-2xl diametric-card">
+              <span class="text-neon font-bold block mb-1">⚡ Auto-Split 4 Amplop</span>
+              <span class="text-slate-400">Uang masuk langsung terbagi otomatis sesuai porsi kebutuhanmu.</span>
+            </div>
+            <div class="p-3.5 rounded-2xl diametric-card">
+              <span class="text-magenta font-bold block mb-1">🔒 Privasi 2 Arah</span>
+              <span class="text-slate-400">Tukar kode rahasia berdua & atur izin tampilan nominal kapan saja.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan (Form Daftar / Login) -->
+        <div class="md:col-span-6 diametric-card rounded-3xl p-6 md:p-8">
+          <div class="grid grid-cols-2 gap-1.5 p-1.5 bg-void/90 rounded-2xl border border-borderDiametric mb-6">
+            <button id="tab-btn-register" onclick="switchAuthMode('register')" class="py-2.5 text-xs font-bold rounded-xl btn-neon-pill">
+              Daftar Baru
+            </button>
+            <button id="tab-btn-login" onclick="switchAuthMode('login')" class="py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition">
+              Masuk Akun
+            </button>
+          </div>
+
+          <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+            <div id="field-name-wrap">
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">Nama Panggilan</label>
+              <input id="auth-name" type="text" placeholder="Contoh: Aflah" class="w-full px-4 py-3 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none text-sm text-white placeholder-slate-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">Email Aktif</label>
+              <input id="auth-email" type="email" required placeholder="nama@email.com" class="w-full px-4 py-3 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none text-sm text-white placeholder-slate-500" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">Kata Sandi</label>
+              <input id="auth-password" type="password" required minlength="6" placeholder="Minimal 6 karakter" class="w-full px-4 py-3 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none text-sm text-white placeholder-slate-500" />
+            </div>
+
+            <button id="auth-submit-btn" type="submit" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-bold text-sm tracking-wide mt-2">
+              Daftar & Kirim Verifikasi Email
+            </button>
+          </form>
+
+          <div class="mt-5 flex items-center justify-center gap-2 text-[11px] text-slate-400">
+            <span id="firebase-status-dot" class="w-2 h-2 rounded-full bg-magenta animate-pulse"></span>
+            <span id="firebase-status-label">Mode Lokal Siap Pakai (Bisa Disambung Firebase)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- GERBANG 2: HALAMAN VERIFIKASI EMAIL                                   -->
+    <!-- ===================================================================== -->
+    <section id="screen-verify" class="hidden flex-1 flex items-center justify-center p-6">
+      <div class="w-full max-w-md diametric-card rounded-3xl p-7 text-center">
+        <div class="w-16 h-16 rounded-full bg-magenta/15 border border-magenta/50 flex items-center justify-center mx-auto mb-5 text-magenta">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+
+        <h2 class="font-display text-2xl font-bold text-white">Cek Kotak Masuk Emailmu</h2>
+        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+          Tautan verifikasi sudah dikirim ke <span id="verify-email-display" class="text-neon font-bold">email@kamu.com</span>. Klik tautan tersebut sebelum mendapatkan kode rahasia Stiti.id.
+        </p>
+
+        <div class="mt-7 space-y-3">
+          <button onclick="checkEmailVerification(false)" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-bold text-sm">
+            Saya Sudah Klik Tautan Verifikasi
+          </button>
+
+          <button onclick="resendVerificationEmail()" id="btn-resend-verify" class="hidden w-full py-3 rounded-2xl bg-void border border-borderDiametric text-xs font-bold text-slate-300 hover:border-magenta">
+            Kirim Ulang Email Verifikasi
+          </button>
+
+          <button onclick="checkEmailVerification(true)" id="btn-demo-verify" class="w-full py-3 rounded-2xl bg-surfaceLight border border-magenta/40 hover:border-neon text-xs font-bold text-slate-200 tactile-btn">
+            [Mode Tes Lokal] Lewati Verifikasi Email
+          </button>
+        </div>
+
+        <button onclick="logoutUser()" class="text-xs text-slate-500 hover:text-slate-300 mt-6">
+          Ganti Email / Keluar
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- GERBANG 3: CROSS-PAIRING KODE RAHASIA 2 ARAH                          -->
+    <!-- ===================================================================== -->
+    <section id="screen-pairing" class="hidden flex-1 flex items-center justify-center p-6">
+      <div class="w-full max-w-md diametric-card rounded-3xl p-6 md:p-8">
+        <div class="mb-6">
+          <span class="px-3 py-1 rounded-full bg-magenta/20 text-pink-300 text-[11px] font-bold uppercase tracking-wider">Kunci Koneksi 2 Arah</span>
+          <h2 class="font-display text-2xl font-bold text-white mt-2">Tukar Kode Rahasia</h2>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+            Kirim kodemu ke temanmu, lalu masukkan kode milik temanmu di bawah. Akun otomatis terkunci berdua setelah saling cocok.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-void/90 border border-neon/50 mb-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-slate-400 block">Kode Rahasia Milikmu:</span>
+              <span id="my-pairing-code" class="font-num text-2xl font-extrabold tracking-[0.22em] text-neon mt-0.5 block">------</span>
+            </div>
+            <button onclick="copyMyCode()" class="px-4 py-2.5 rounded-xl btn-magenta-pill text-xs font-bold">
+              Salin Kode
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-borderDiametric/60 flex items-center gap-2 text-[11px] text-pink-300">
+            <span class="w-2 h-2 rounded-full bg-magenta animate-ping"></span>
+            <span id="partner-ack-text">Menunggu temanmu memasukkan kodemu...</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-void/70 border border-borderDiametric space-y-3">
+          <label class="block text-xs font-bold text-slate-300">Masukkan Kode Rahasia Temanmu:</label>
+          <input id="input-partner-code" type="text" maxlength="6" placeholder="X9K2M4" class="w-full px-4 py-3.5 rounded-2xl bg-surface border border-borderDiametric focus:border-neon focus:outline-none font-num text-center text-xl font-extrabold tracking-[0.25em] uppercase text-white placeholder-slate-600" />
+
+          <button onclick="submitPartnerCode()" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-bold text-sm">
+            Hubungkan & Lanjut
+          </button>
+
+          <button onclick="simulateFullPairing()" id="btn-demo-pair" class="w-full py-2.5 rounded-xl bg-surfaceLight border border-magenta/40 hover:border-neon text-[11px] font-bold text-slate-200 tactile-btn">
+            [Mode Tes Lokal] Simulasikan Teman Sudah Tukar Kode
+          </button>
+        </div>
+
+        <button onclick="logoutUser()" class="w-full text-xs text-slate-500 hover:text-slate-300 mt-5 text-center">
+          Keluar Akun
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- GERBANG 4: HALAMAN PEMBUKA SETELAH LOGIN (LOGO S & WISDOM REMINDER)   -->
+    <!-- ===================================================================== -->
+    <section id="screen-welcome" class="hidden flex-1 flex items-center justify-center p-5 md:p-10">
+      <div class="w-full max-w-xl text-center space-y-6">
+
+        <!-- LOGO HURUF S TUNGGAL TANPA LATAR BELAKANG + BRAND STITI.ID -->
+        <div class="flex flex-col items-center justify-center">
+          <svg class="w-24 h-24 md:w-28 md:h-28 drop-shadow-[0_0_28px_rgba(37,249,28,0.3)] mb-3" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logoPurpleSplash" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#E11D8F"/>
+                <stop offset="100%" stop-color="#9333EA"/>
+              </linearGradient>
+              <linearGradient id="logoGreenSplash" x1="18" y1="26" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#25F91C"/>
+                <stop offset="100%" stop-color="#15803D"/>
+              </linearGradient>
+            </defs>
+            <path d="M47 14H25C17.8203 14 12 19.8203 12 27C12 32.8 15.8 37.7 21.2 39.3L37 43.8" stroke="url(#logoPurpleSplash)" stroke-width="8.5" stroke-linecap="round"/>
+            <path d="M17 50H39C46.1797 50 52 44.63 52 37C52 31.2 48.2 26.3 42.8 24.7L27 20.2" stroke="url(#logoGreenSplash)" stroke-width="8.5" stroke-linecap="round"/>
+          </svg>
+
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+            Stiti<span class="text-neon">.id</span>
+          </h1>
+          <p id="welcome-user-subtitle" class="text-xs md:text-sm text-pink-300 font-semibold mt-1">
+            Selamat datang kembali • Jaga ritme, kawal masa depan
+          </p>
+        </div>
+
+        <!-- FILTER KATEGORI REMINDER -->
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          <button onclick="filterWisdom('all')" id="wcat-all" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-neon text-void tactile-btn">Semua</button>
+          <button onclick="filterWisdom('ulama')" id="wcat-ulama" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn">Ulama</button>
+          <button onclick="filterWisdom('ahli')" id="wcat-ahli" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn">Ahli Keuangan</button>
+          <button onclick="filterWisdom('influencer')" id="wcat-influencer" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn">Edukator & Falsafah</button>
+        </div>
+
+        <!-- KARTU PENGINGAT & MOTIVASI FINANSIAL -->
+        <div class="diametric-border-glow rounded-3xl p-6 md:p-8 text-left relative overflow-hidden">
+          <div class="flex items-center justify-between mb-3">
+            <span id="wisdom-badge" class="px-3 py-1 rounded-full bg-magenta/20 border border-magenta/40 text-[11px] font-bold text-pink-300">
+              Ulama & Cendekiawan
+            </span>
+            <button onclick="nextWisdomQuote()" class="px-3 py-1.5 rounded-full bg-void/80 hover:bg-surfaceLight border border-borderDiametric text-xs font-bold text-neon flex items-center gap-1.5 tactile-btn">
+              <span>↻</span> Kutipan Lain
+            </button>
+          </div>
+
+          <blockquote id="wisdom-quote" class="font-display text-lg md:text-xl font-bold text-white leading-snug mb-4">
+            "Memuat pengingat..."
+          </blockquote>
+
+          <div class="flex items-center justify-between pt-3 border-t border-borderDiametric/60">
+            <div>
+              <p id="wisdom-author" class="text-sm font-bold text-neon">Tokoh</p>
+              <p id="wisdom-role" class="text-[11px] text-slate-400">Keterangan</p>
+            </div>
+            <span class="text-2xl opacity-60">❝</span>
+          </div>
+        </div>
+
+        <!-- TOMBOL MASUK KE HALAMAN UTAMA -->
+        <div class="pt-2">
+          <button onclick="enterMainApp()" class="w-full md:w-auto md:px-10 py-4 rounded-full btn-neon-pill font-display font-extrabold text-sm md:text-base tracking-wide">
+            Masuk ke Dashboard Stiti.id →
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- APLIKASI UTAMA (ADAPTIF LAPTOP SIDEBAR & HP BOTTOM NAV)                -->
+    <!-- ===================================================================== -->
+    <div id="screen-app" class="hidden flex-1 flex flex-col md:flex-row">
+
+      <!-- DESKTOP / LAPTOP SIDEBAR NAVIGATION (TERSEMBUNYI DI HP) -->
+      <aside class="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col justify-between bg-surface/90 backdrop-blur-xl border-r border-borderDiametric/70 p-5 sticky top-0 h-screen">
+        <div>
+          <!-- Brand Header Sidebar -->
+          <div class="flex items-center gap-3 mb-7">
+            <svg class="w-10 h-10 shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoPurpleSide" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#E11D8F"/>
+                  <stop offset="100%" stop-color="#9333EA"/>
+                </linearGradient>
+                <linearGradient id="logoGreenSide" x1="18" y1="26" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#25F91C"/>
+                  <stop offset="100%" stop-color="#15803D"/>
+                </linearGradient>
+              </defs>
+              <path d="M47 14H25C17.8203 14 12 19.8203 12 27C12 32.8 15.8 37.7 21.2 39.3L37 43.8" stroke="url(#logoPurpleSide)" stroke-width="8.5" stroke-linecap="round"/>
+              <path d="M17 50H39C46.1797 50 52 44.63 52 37C52 31.2 48.2 26.3 42.8 24.7L27 20.2" stroke="url(#logoGreenSide)" stroke-width="8.5" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <span class="font-display font-extrabold text-2xl text-white leading-none block">Stiti<span class="text-neon">.id</span></span>
+              <span id="sidebar-streak" class="text-[11px] font-bold text-pink-300 mt-0.5 block">🔥 1 Hari Konsisten</span>
+            </div>
+          </div>
+
+          <!-- Tombol Utama Catat Transaksi di Laptop -->
+          <button onclick="openTxModal()" class="w-full py-3.5 px-4 rounded-2xl btn-neon-pill font-display font-extrabold text-sm flex items-center justify-center gap-2 mb-6">
+            <span class="text-lg leading-none">+</span> Catat Transaksi
+          </button>
+
+          <!-- Menu Navigasi Laptop -->
+          <nav class="space-y-1.5">
+            <button onclick="switchTab('berdua')" id="dnav-berdua" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-neon/15 border border-neon/40 text-neon text-xs font-bold tactile-btn">
+              <span>📊</span> Dashboard Berdua
+            </button>
+            <button onclick="switchTab('dompetku')" id="dnav-dompetku" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-surfaceLight hover:text-white text-xs font-bold tactile-btn">
+              <span>💳</span> Dompetku & Periode
+            </button>
+            <button onclick="switchTab('evaluasi')" id="dnav-evaluasi" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-surfaceLight hover:text-white text-xs font-bold tactile-btn">
+              <span>🧠</span> Evaluasi & Peringatan
+            </button>
+            <button onclick="switchTab('teman')" id="dnav-teman" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-surfaceLight hover:text-white text-xs font-bold tactile-btn">
+              <span>🤝</span> Pantau Teman
+            </button>
+            <button onclick="switchTab('atur')" id="dnav-atur" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-surfaceLight hover:text-white text-xs font-bold tactile-btn">
+              <span>⚙️</span> Atur Porsi & Privasi
+            </button>
+          </nav>
+        </div>
+
+        <!-- Bagian Bawah Sidebar Laptop -->
+        <div class="space-y-2.5 pt-4 border-t border-borderDiametric/60">
+          <button onclick="openWisdomScreen()" class="w-full py-2.5 px-3 rounded-xl bg-void border border-magenta/40 hover:border-neon text-xs font-bold text-pink-300 flex items-center justify-center gap-2 tactile-btn">
+            <span>✨</span> Kutipan Penyemangat
+          </button>
+          <button onclick="toggleScreenMask()" class="w-full py-2.5 px-3 rounded-xl bg-surfaceLight border border-borderDiametric text-xs font-bold text-slate-200 flex items-center justify-center gap-2 tactile-btn">
+            <span id="sidebar-mask-label">👁️ Sensor Layar: Nonaktif</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- KOLOM KONTEN UTAMA (RESPONSIF HP & LAPTOP) -->
+      <div class="flex-1 flex flex-col min-w-0 pb-24 md:pb-10">
+
+        <!-- MOBILE TOP HEADER (TERSEMBUNYI DI LAPTOP) -->
+        <header class="md:hidden sticky top-0 z-30 bg-void/90 backdrop-blur-xl border-b border-borderDiametric/70 px-4 py-3 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <!-- Logo Huruf S Tunggal Tanpa Latar Belakang -->
+            <svg class="w-8 h-8 shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoPurpleMob" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#E11D8F"/>
+                  <stop offset="100%" stop-color="#9333EA"/>
+                </linearGradient>
+                <linearGradient id="logoGreenMob" x1="18" y1="26" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#25F91C"/>
+                  <stop offset="100%" stop-color="#15803D"/>
+                </linearGradient>
+              </defs>
+              <path d="M47 14H25C17.8203 14 12 19.8203 12 27C12 32.8 15.8 37.7 21.2 39.3L37 43.8" stroke="url(#logoPurpleMob)" stroke-width="8.5" stroke-linecap="round"/>
+              <path d="M17 50H39C46.1797 50 52 44.63 52 37C52 31.2 48.2 26.3 42.8 24.7L27 20.2" stroke="url(#logoGreenMob)" stroke-width="8.5" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="font-display font-extrabold text-lg text-white">Stiti<span class="text-neon">.id</span></span>
+                <span id="header-streak" class="px-2 py-0.5 rounded-full bg-magenta/20 border border-magenta/40 text-[10px] font-bold text-pink-300">
+                  🔥 1 Hari
+                </span>
+              </div>
+              <p id="header-greeting" class="text-[11px] text-slate-400">Halo, Pengguna</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button onclick="openWisdomScreen()" title="Kutipan Penyemangat" class="p-2.5 rounded-full bg-surface border border-magenta/40 text-pink-300 tactile-btn">
+              ✨
+            </button>
+            <button onclick="toggleScreenMask()" id="btn-mask-screen" title="Sensor Nominal di Layar" class="p-2.5 rounded-full bg-surface border border-borderDiametric hover:border-neon text-slate-200 tactile-btn">
+            </button>
+          </div>
+        </header>
+
+        <!-- CONTAINER DALAM LAPTOP AGAR LEGA & PROPORSIONAL -->
+        <div class="w-full max-w-6xl mx-auto p-4 md:p-7 space-y-5">
+
+          <!-- BANNER PERINGATAN REKAP AKHIR BULAN & EKSPOR EXCEL -->
+          <div id="eom-banner" class="hidden rounded-3xl p-4 md:p-5 bg-gradient-to-r from-magenta/25 via-surfaceLight to-neon/20 border border-magenta/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl mt-0.5">📅</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-full bg-magenta text-white text-[10px] font-extrabold uppercase">Peringatan Akhir Bulan</span>
+                  <span id="eom-month-label" class="text-xs font-bold text-neon">Rekap Bulanan</span>
+                </div>
+                <p class="text-xs text-slate-200 mt-1 leading-relaxed">
+                  Akhir bulan sudah tiba! Unduh rekap transaksi & sisa 4 amplopmu ke file <strong>Excel (.xlsx)</strong> sekarang untuk evaluasi bareng teman.
+                </p>
+              </div>
+            </div>
+            <button onclick="exportToExcel()" class="shrink-0 px-4 py-2.5 rounded-full btn-neon-pill font-display font-bold text-xs">
+              ⬇ Export Excel Sekarang
+            </button>
+          </div>
+
+          <!-- =============================================================== -->
+          <!-- TAB 1: DASHBOARD UTAMA BERDUA                                   -->
+          <!-- =============================================================== -->
+          <main id="view-berdua" class="space-y-5">
+
+            <!-- Header Ringkasan & Aksi Cepat -->
+            <div class="diametric-card rounded-3xl p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span class="px-3 py-1 rounded-full bg-neon/15 border border-neon/40 text-[10px] font-extrabold text-neon uppercase tracking-wider">
+                  Radar Stabilitas Berdua
+                </span>
+                <h2 class="font-display text-xl md:text-2xl font-extrabold text-white mt-2">
+                  Visual & Kesehatan 4 Amplop
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">
+                  Hijau (&gt;50% stabil), Kuning (20–50% mulai irit), Merah (&lt;20% rem jajan).
+                </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button onclick="sendNudgeToPartner()" class="px-4 py-2.5 rounded-full btn-magenta-pill text-xs font-bold flex items-center gap-1.5">
+                  <span>⚡</span> Colek Teman
+                </button>
+                <button onclick="toggleEndOfMonthPreview()" class="px-3.5 py-2.5 rounded-full bg-void border border-borderDiametric hover:border-neon text-xs font-bold text-slate-300 tactile-btn">
+                  📅 Cek Rekap Bulan
+                </button>
+              </div>
+            </div>
+
+            <!-- GRID GRAFIK VISUAL (DONUT DISTRIBUSI + GRAFIK BATANG PERBANDINGAN) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+              <!-- Grafik Donut Distribusi 4 Amplopku -->
+              <div class="lg:col-span-5 diametric-card rounded-3xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-display font-bold text-base text-white">Komposisi Amplopku</h3>
+                  <span id="donut-period-tag" class="text-[11px] font-bold text-pink-300 bg-magenta/20 px-2.5 py-0.5 rounded-full">Periode Aktif</span>
+                </div>
+
+                <div class="flex items-center justify-center my-2 relative">
+                  <svg id="my-donut-svg" class="w-48 h-48 -rotate-90" viewBox="0 0 160 160">
+                    <!-- Segmen diisi dinamis via JS -->
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                    <span class="text-[10px] font-bold uppercase text-slate-400">Total Sisa</span>
+                    <span id="donut-center-val" class="font-num text-sm font-extrabold text-neon mt-0.5">Rp 0</span>
+                  </div>
+                </div>
+
+                <div id="donut-legend" class="grid grid-cols-2 gap-2 mt-3 text-[11px]">
+                  <!-- Legend diisi JS -->
+                </div>
+              </div>
+
+              <!-- Grafik Perbandingan Sisa Amplop: Kamu vs Teman -->
+              <div class="lg:col-span-7 diametric-card rounded-3xl p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-3">
+                  <div>
+                    <h3 class="font-display font-bold text-base text-white">Grafik Perbandingan Berdua (%)</h3>
+                    <p class="text-[11px] text-slate-400">Persentase sisa tiap pos milikmu (Hijau) vs temanmu (Magenta)</p>
+                  </div>
+                  <div class="flex items-center gap-3 text-[11px] font-bold">
+                    <span class="flex items-center gap-1.5 text-neon"><span class="w-2.5 h-2.5 rounded-full bg-neon"></span> Kamu</span>
+                    <span class="flex items-center gap-1.5 text-magenta"><span class="w-2.5 h-2.5 rounded-full bg-magenta"></span> Teman</span>
+                  </div>
+                </div>
+
+                <div id="comparison-bar-chart" class="space-y-4 my-auto py-2">
+                  <!-- Bar chart ganda diisi JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- DETAIL PROGRESS AMPLOPKU & AMPLOP TEMAN BERDAMPINGAN DI LAPTOP -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="diametric-card rounded-3xl p-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-neon shadow-[0_0_10px_#25F91C]"></span>
+                    <h3 id="dash-my-name" class="font-display font-bold text-base text-white">Amplopku</h3>
+                  </div>
+                  <span id="dash-my-total-pct" class="font-num text-xs font-extrabold text-neon">Sisa 100%</span>
+                </div>
+                <div id="dash-my-envelopes" class="space-y-3.5"></div>
+              </div>
+
+              <div class="diametric-card rounded-3xl p-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-magenta shadow-[0_0_10px_#E11D8F]"></span>
+                    <h3 id="dash-partner-name" class="font-display font-bold text-base text-white">Amplop Teman</h3>
+                  </div>
+                  <span id="dash-partner-privacy-badge" class="px-2.5 py-0.5 rounded-full bg-void text-[10px] font-bold text-pink-300 border border-magenta/40">
+                    Mode Privasi (%)
+                  </span>
+                </div>
+                <div id="dash-partner-envelopes" class="space-y-3.5"></div>
+              </div>
+            </div>
+
+            <!-- Log Aktivitas & Colekan Terakhir -->
+            <div class="diametric-card rounded-3xl p-5">
+              <h3 class="font-display font-bold text-base text-white mb-3">Aktivitas & Pengingat Terkini</h3>
+              <div id="shared-feed-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-slate-200"></div>
+            </div>
+          </main>
+
+          <!-- =============================================================== -->
+          <!-- TAB 2: DASHBOARD DOMPETKU & PERIODE ANGGARAN                    -->
+          <!-- =============================================================== -->
+          <main id="view-dompetku" class="hidden space-y-5">
+
+            <!-- BARIS ATAS: 2 KARTU SALDO + KARTU PERIODE TANGGAL & JATAH HARIAN -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+              <!-- Rekening QRIS & Dompet Cash -->
+              <div class="lg:col-span-6 grid grid-cols-2 gap-3.5">
+                <div class="diametric-card rounded-3xl p-4 flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-300">📱 Rekening / QRIS</span>
+                    <button onclick="openReconcileModal('qris')" class="px-2.5 py-1 rounded-full bg-neon/15 text-[10px] font-bold text-neon hover:bg-neon hover:text-void tactile-btn">
+                      Koreksi
+                    </button>
+                  </div>
+                  <p id="wallet-qris-bal" class="font-num text-lg md:text-xl font-extrabold text-white truncate">Rp 0</p>
+                  <span class="text-[11px] text-slate-400 mt-1">Saldo Bank Digital</span>
+                </div>
+
+                <div class="diametric-card rounded-3xl p-4 flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-300">💵 Dompet Cash</span>
+                    <button onclick="openReconcileModal('cash')" class="px-2.5 py-1 rounded-full bg-magenta/20 text-[10px] font-bold text-pink-300 hover:bg-magenta hover:text-white tactile-btn">
+                      Koreksi
+                    </button>
+                  </div>
+                  <p id="wallet-cash-bal" class="font-num text-lg md:text-xl font-extrabold text-white truncate">Rp 0</p>
+                  <span class="text-[11px] text-slate-400 mt-1">Uang Tunai Fisik</span>
+                </div>
+              </div>
+
+              <!-- KARTU PERIODE UANG SAKU & BATAS AMAN HARIAN -->
+              <div class="lg:col-span-6 diametric-border-glow rounded-3xl p-4 md:p-5 flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-neon">Target Durasi Uang Saku</span>
+                    <h3 id="period-summary-title" class="font-display text-base md:text-lg font-extrabold text-white">
+                      Belum Ada Periode Aktif
+                    </h3>
+                  </div>
+                  <button onclick="openPeriodModal()" class="px-3.5 py-1.5 rounded-full btn-magenta-pill text-xs font-bold shrink-0">
+                    Atur Tanggal
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5 mt-2 pt-2.5 border-t border-borderDiametric/60 text-xs">
+                  <div>
+                    <span class="text-[10px] text-slate-400 block">Rentang Tanggal:</span>
+                    <span id="period-date-range" class="font-bold text-slate-200">-</span>
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-slate-400 block">Jatah Aman Harian:</span>
+                    <span id="period-daily-limit" class="font-num font-extrabold text-neon">Rp 0 / hari</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BARIS BAWAH: AMPLOP AKTIF & RIWAYAT TRANSAKSI -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              <!-- Daftar Amplop Pribadi -->
+              <div class="lg:col-span-6 diametric-card rounded-3xl p-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-display font-bold text-base text-white">Jatah Amplop Aktif</h3>
+                    <p class="text-[11px] text-slate-400">Otomatis terbagi & menyesuaikan perubahan porsi</p>
+                  </div>
+                  <button onclick="switchTab('atur')" class="px-3 py-1.5 rounded-full bg-surfaceLight border border-neon/40 text-xs font-bold text-neon tactile-btn">
+                    Ubah Porsi
+                  </button>
+                </div>
+                <div id="my-detailed-envelopes" class="space-y-3"></div>
+              </div>
+
+              <!-- Riwayat Transaksi Pribadi & Rekap Bulanan -->
+              <div class="lg:col-span-6 diametric-card rounded-3xl p-5 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 class="font-display font-bold text-base text-white">Riwayat & Rekap Bulanan</h3>
+                      <p id="monthly-recap-subtitle" class="text-[11px] text-slate-400">Rekap otomatis setiap akhir bulan</p>
+                    </div>
+                    <button onclick="exportToExcel()" class="px-3.5 py-2 rounded-full btn-neon-pill text-xs font-bold">
+                      ⬇ Export Excel
+                    </button>
+                  </div>
+                  <div id="my-tx-list" class="space-y-2.5 max-h-[420px] overflow-y-auto pr-1"></div>
+                </div>
+              </div>
+            </div>
+          </main>
+
+          <!-- =============================================================== -->
+          <!-- TAB 3: DASHBOARD EVALUASI OTOMATIS (BAIK & KURANG)              -->
+          <!-- =============================================================== -->
+          <main id="view-evaluasi" class="hidden space-y-5">
+
+            <!-- Header & Skor Kesehatan Finansial -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              <!-- Kartu Gauge Skor -->
+              <div class="lg:col-span-4 diametric-card rounded-3xl p-6 flex flex-col items-center justify-center text-center">
+                <span class="px-3 py-1 rounded-full bg-magenta/20 text-pink-300 text-[10px] font-extrabold uppercase tracking-wider mb-3">
+                  Indeks Kesehatan Stiti.id
+                </span>
+                <div class="relative w-36 h-36 flex items-center justify-center">
+                  <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#211238" stroke-width="12"/>
+                    <circle id="eval-score-ring" cx="60" cy="60" r="50" fill="none" stroke="#25F91C" stroke-width="12" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="60" class="transition-all duration-700"/>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span id="eval-score-num" class="font-num text-3xl font-extrabold text-white">85</span>
+                    <span class="text-[10px] font-bold text-slate-400">dari 100</span>
+                  </div>
+                </div>
+                <p id="eval-score-verdict" class="font-display font-bold text-sm text-neon mt-3">Ritme Keuangan Stabil</p>
+              </div>
+
+              <!-- Ringkasan Evaluasi Angka & Rekap Akhir Bulan -->
+              <div class="lg:col-span-8 diametric-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                  <h2 class="font-display text-xl font-extrabold text-white">Evaluasi Otomatis & Peringatan Dini</h2>
+                  <p class="text-xs text-slate-400 mt-1">
+                    Sistem menganalisis sisa tiap amplop, laju belanja harian terhadap durasi tanggal, dan ketahanan dana masa depanmu.
+                  </p>
+
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-5">
+                    <div class="p-3.5 rounded-2xl bg-void border border-borderDiametric">
+                      <span class="text-[10px] text-slate-400 block">Total Pemasukan</span>
+                      <span id="eval-total-in" class="font-num text-sm font-extrabold text-neon mt-1 block">Rp 0</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-void border border-borderDiametric">
+                      <span class="text-[10px] text-slate-400 block">Total Terpakai</span>
+                      <span id="eval-total-out" class="font-num text-sm font-extrabold text-magenta mt-1 block">Rp 0</span>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1 p-3.5 rounded-2xl bg-void border border-borderDiametric">
+                      <span class="text-[10px] text-slate-400 block">Rata-Rata Keluar/Hari</span>
+                      <span id="eval-daily-burn" class="font-num text-sm font-extrabold text-white mt-1 block">Rp 0</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-5 pt-4 border-t border-borderDiametric/60 flex flex-wrap items-center justify-between gap-3">
+                  <span class="text-xs text-slate-300">Siap menyimpan laporan bulan ini ke Excel?</span>
+                  <button onclick="exportToExcel()" class="px-4 py-2 rounded-full btn-neon-pill text-xs font-bold">
+                    ⬇ Unduh Rekap Bulanan (.xlsx)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- DUA KOLOM OTOMATIS: HAL BAIK (APRESIASI) VS HAL KURANG (PERINGATAN) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <!-- Kolom Hal Baik -->
+              <div class="diametric-card rounded-3xl p-5 border-neon/40">
+                <div class="flex items-center gap-2.5 mb-4">
+                  <span class="w-8 h-8 rounded-full bg-neon/20 text-neon flex items-center justify-center font-bold">✓</span>
+                  <div>
+                    <h3 class="font-display font-bold text-base text-neon">Kondisi Baik & Apresiasi</h3>
+                    <p class="text-[11px] text-slate-400">Kebiasaan sehat yang sudah berjalan</p>
+                  </div>
+                </div>
+                <div id="eval-good-list" class="space-y-3 text-xs">
+                  <!-- Diisi dinamis oleh JS -->
+                </div>
+              </div>
+
+              <!-- Kolom Hal Kurang / Peringatan -->
+              <div class="diametric-card rounded-3xl p-5 border-magenta/40">
+                <div class="flex items-center gap-2.5 mb-4">
+                  <span class="w-8 h-8 rounded-full bg-magenta/20 text-magenta flex items-center justify-center font-bold">!</span>
+                  <div>
+                    <h3 class="font-display font-bold text-base text-magenta">Peringatan & Evaluasi Kurang</h3>
+                    <p class="text-[11px] text-slate-400">Pos yang perlu segera direm atau diperbaiki</p>
+                  </div>
+                </div>
+                <div id="eval-bad-list" class="space-y-3 text-xs">
+                  <!-- Diisi dinamis oleh JS -->
+                </div>
+              </div>
+            </div>
+          </main>
+
+          <!-- =============================================================== -->
+          <!-- TAB 4: DASHBOARD DOMPET TEMAN                                   -->
+          <!-- =============================================================== -->
+          <main id="view-teman" class="hidden space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              <div class="lg:col-span-5 diametric-card rounded-3xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h2 id="partner-page-name" class="font-display text-xl font-extrabold text-white">Profil Teman</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Kode Teman: <span id="partner-code-label" class="text-neon font-num font-bold">------</span></p>
+                  </div>
+                  <span id="partner-streak-badge" class="px-3.5 py-1.5 rounded-full bg-magenta/20 border border-magenta/40 text-xs font-bold text-pink-300">
+                    🔥 3 Hari
+                  </span>
+                </div>
+
+                <!-- Simulasi Toggle Privasi Teman (Mode Lokal) -->
+                <div id="demo-partner-privacy-wrap" class="p-3.5 rounded-2xl bg-void border border-borderDiametric flex items-center justify-between gap-2">
+                  <span class="text-[11px] text-slate-400">Simulasi Mode Privasi Teman:</span>
+                  <button onclick="toggleDemoPartnerPrivacy()" id="btn-demo-partner-privacy" class="px-3 py-1.5 rounded-full bg-surfaceLight text-[11px] font-bold text-neon border border-neon/40 tactile-btn">
+                    Privasi Aktif (Hanya %)
+                  </button>
+                </div>
+
+                <!-- Kirim Pesan Motivasi / Pengingat -->
+                <div class="space-y-2.5 pt-2">
+                  <label class="block text-xs font-bold text-white">Kirim Catatan Semangat / Pengingat</label>
+                  <div class="flex gap-2">
+                    <input id="nudge-custom-input" type="text" placeholder="Contoh: Jajan kopi udah 75% nih, tahan dulu!" class="flex-1 px-3.5 py-2.5 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none text-xs text-white" />
+                    <button onclick="sendCustomNudge()" class="px-4 py-2.5 rounded-2xl btn-neon-pill font-bold text-xs">
+                      Kirim
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lg:col-span-7 diametric-card rounded-3xl p-5">
+                <h3 class="font-display font-bold text-base text-white mb-4">Status Amplop Teman</h3>
+                <div id="partner-detailed-envelopes" class="space-y-3.5"></div>
+              </div>
+            </div>
+          </main>
+
+          <!-- =============================================================== -->
+          <!-- TAB 5: PENGATURAN AMPLOP OTOMATIS & PRIVASI                     -->
+          <!-- =============================================================== -->
+          <main id="view-atur" class="hidden space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+              <!-- Kolom Kiri: Sakelar Privasi & Info Akun -->
+              <div class="lg:col-span-5 space-y-4">
+                <div class="diametric-card rounded-3xl p-5">
+                  <div class="flex items-center justify-between gap-3">
+                    <div>
+                      <h3 class="font-display font-bold text-base text-white">Izin Pantau Teman</h3>
+                      <p id="privacy-share-desc" class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        Saat ini: <strong>Mode Privasi</strong> (Teman hanya melihat persentase sisa amplopmu).
+                      </p>
+                    </div>
+                    <button onclick="toggleShareNominal()" id="toggle-share-btn" class="w-14 h-8 rounded-full bg-void border border-borderDiametric p-1 transition flex items-center shrink-0 tactile-btn">
+                      <span id="toggle-share-dot" class="w-6 h-6 rounded-full bg-slate-400 transition-transform"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="diametric-card rounded-3xl p-5 space-y-3">
+                  <h3 class="font-display font-bold text-sm text-white">Identitas Koneksi Berdua</h3>
+                  <div class="flex items-center justify-between text-xs p-3 rounded-2xl bg-void">
+                    <span class="text-slate-400">Kode Unikmu:</span>
+                    <span id="settings-my-code" class="font-num font-extrabold text-neon">------</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs p-3 rounded-2xl bg-void">
+                    <span class="text-slate-400">Terhubung Dengan:</span>
+                    <span id="settings-partner-info" class="font-bold text-white">Partner (------)</span>
+                  </div>
+                  <button onclick="logoutUser()" class="w-full py-3 rounded-2xl bg-red-500/15 border border-red-500/40 hover:bg-red-500/25 text-red-300 text-xs font-bold tactile-btn mt-2">
+                    Keluar dari Akun
+                  </button>
+                </div>
+              </div>
+
+              <!-- Kolom Kanan: Kustomisasi Porsi Amplop (Otomatis Ubah Nominal Pembagian) -->
+              <div class="lg:col-span-7 diametric-card rounded-3xl p-5 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <h3 class="font-display font-bold text-base text-white">Atur Amplop & Persentase</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                      Saat porsi diubah & disimpan, <strong>nominal rupiah tiap amplop otomatis dihitung ulang</strong>!
+                    </p>
+                  </div>
+                  <span id="pct-total-badge" class="font-num px-3 py-1.5 rounded-full bg-neon/20 text-neon text-xs font-extrabold">
+                    Total: 100%
+                  </span>
+                </div>
+
+                <div id="custom-envelopes-editor" class="space-y-3"></div>
+
+                <div class="flex flex-col sm:flex-row gap-2.5 pt-2">
+                  <button onclick="addNewEnvelopeRow()" class="flex-1 py-3 rounded-2xl bg-surfaceLight border border-magenta/40 hover:border-neon text-xs font-bold text-white tactile-btn">
+                    + Tambah Pos Amplop
+                  </button>
+                  <button id="btn-save-envelopes" onclick="saveEnvelopeConfig()" class="flex-1 py-3 rounded-2xl btn-neon-pill font-display font-bold text-xs">
+                    Simpan & Hitung Ulang Otomatis
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </main>
+
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- MOBILE BOTTOM NAVIGATION BAR (TERSEMBUNYI DI LAPTOP)                 -->
+      <!-- =================================================================== -->
+      <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-surface/95 backdrop-blur-xl border-t border-borderDiametric px-1.5 py-2 flex items-center justify-around">
+        <button onclick="switchTab('berdua')" id="nav-berdua" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-neon tactile-btn">
+          <span class="text-base">📊</span>
+          <span class="text-[10px] font-bold">Berdua</span>
+        </button>
+
+        <button onclick="switchTab('dompetku')" id="nav-dompetku" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn">
+          <span class="text-base">💳</span>
+          <span class="text-[10px] font-bold">Dompetku</span>
+        </button>
+
+        <!-- Tombol Tengah Cepat Catat Transaksi -->
+        <button onclick="openTxModal()" class="w-12 h-12 -mt-6 rounded-full btn-neon-pill flex items-center justify-center text-xl font-extrabold">
+          +
+        </button>
+
+        <button onclick="switchTab('evaluasi')" id="nav-evaluasi" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn">
+          <span class="text-base">🧠</span>
+          <span class="text-[10px] font-bold">Evaluasi</span>
+        </button>
+
+        <button onclick="switchTab('teman')" id="nav-teman" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn">
+          <span class="text-base">🤝</span>
+          <span class="text-[10px] font-bold">Teman</span>
+        </button>
+
+        <button onclick="switchTab('atur')" id="nav-atur" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn">
+          <span class="text-base">⚙️</span>
+          <span class="text-[10px] font-bold">Atur</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: CATAT TRANSAKSI CEPAT + TANGGAL DURASI UANG SAKU             -->
+    <!-- ===================================================================== -->
+    <div id="modal-tx" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-end md:items-center justify-center p-0 md:p-4">
+      <div class="w-full max-w-md bg-surface border border-magenta/50 rounded-t-3xl md:rounded-3xl p-5 md:p-6 space-y-4 max-h-[92vh] overflow-y-auto">
+        <div class="flex items-center justify-between">
+          <h3 class="font-display text-lg font-extrabold text-white">Catat di Stiti<span class="text-neon">.id</span></h3>
+          <button onclick="closeTxModal()" class="w-8 h-8 rounded-full bg-void text-slate-400 hover:text-white flex items-center justify-center tactile-btn">✕</button>
+        </div>
+
+        <!-- Tipe Transaksi -->
+        <div class="grid grid-cols-3 gap-1.5 p-1 bg-void rounded-2xl border border-borderDiametric">
+          <button type="button" onclick="setTxType('OUT')" id="tx-type-OUT" class="py-2 rounded-xl text-xs font-bold btn-neon-pill">Uang Keluar</button>
+          <button type="button" onclick="setTxType('IN')" id="tx-type-IN" class="py-2 rounded-xl text-xs font-bold text-slate-400">Uang Masuk</button>
+          <button type="button" onclick="setTxType('TRANSFER')" id="tx-type-TRANSFER" class="py-2 rounded-xl text-xs font-bold text-slate-400">Tarik Tunai</button>
+        </div>
+
+        <form onsubmit="submitTransaction(event)" class="space-y-3.5">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Nominal (Rp)</label>
+            <input id="tx-amount" type="number" min="100" required placeholder="Contoh: 500000" class="w-full px-4 py-3 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none font-num text-xl font-extrabold text-neon" />
+          </div>
+
+          <div id="tx-wallet-wrap">
+            <label id="tx-wallet-label" class="block text-xs font-bold text-slate-300 mb-1.5">Sumber Dana</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="setTxWallet('qris')" id="tx-wallet-qris" class="py-2.5 px-3 rounded-2xl border border-neon bg-neon/15 text-neon text-xs font-bold flex items-center justify-center gap-2 tactile-btn">
+                <span>📱</span> Rekening / QRIS
+              </button>
+              <button type="button" onclick="setTxWallet('cash')" id="tx-wallet-cash" class="py-2.5 px-3 rounded-2xl border border-borderDiametric bg-void text-slate-400 text-xs font-bold flex items-center justify-center gap-2 tactile-btn">
+                <span>💵</span> Dompet Cash
+              </button>
+            </div>
+          </div>
+
+          <!-- Pilihan Amplop (Saat Uang Keluar) -->
+          <div id="tx-envelope-wrap">
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">Potong Jatah Amplop Mana?</label>
+            <div id="tx-envelope-pills" class="grid grid-cols-2 gap-2"></div>
+          </div>
+
+          <!-- Pengaturan Tanggal & Durasi Berlaku (Saat Uang Masuk) -->
+          <div id="tx-autosplit-info" class="hidden space-y-3 p-3.5 rounded-2xl bg-void border border-magenta/40">
+            <div>
+              <label class="block text-[11px] font-bold text-pink-300 mb-1.5">Uang Ini Untuk Berapa Lama?</label>
+              <div class="grid grid-cols-3 gap-1.5 mb-2.5">
+                <button type="button" onclick="applyDurationPreset(7)" class="py-1.5 rounded-xl bg-surfaceLight hover:border-neon border border-borderDiametric text-[11px] font-bold text-white tactile-btn">1 Minggu</button>
+                <button type="button" onclick="applyDurationPreset(14)" class="py-1.5 rounded-xl bg-magenta/20 border border-magenta text-[11px] font-bold text-pink-200 tactile-btn">2 Minggu</button>
+                <button type="button" onclick="applyDurationPreset(30)" class="py-1.5 rounded-xl bg-surfaceLight hover:border-neon border border-borderDiametric text-[11px] font-bold text-white tactile-btn">1 Bulan</button>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <span class="text-[10px] text-slate-400 block mb-0.5">Mulai Tanggal</span>
+                  <input id="tx-start-date" type="date" class="w-full px-2.5 py-1.5 rounded-xl bg-surface border border-borderDiametric text-white text-xs" />
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block mb-0.5">Sampai Tanggal</span>
+                  <input id="tx-end-date" type="date" class="w-full px-2.5 py-1.5 rounded-xl bg-surface border border-borderDiametric text-white text-xs" />
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-borderDiametric/60">
+              <p class="font-bold text-neon text-xs mb-1">✨ Preview Auto-Split 4 Amplop:</p>
+              <p id="tx-autosplit-preview" class="text-[11px] text-slate-300 leading-relaxed">Masukkan nominal untuk melihat pembagian otomatis.</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Keterangan (Opsional)</label>
+            <input id="tx-note" type="text" placeholder="Contoh: Uang saku 2 minggu / Makan siang / Bensin" class="w-full px-3.5 py-2.5 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none text-xs text-white" />
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-extrabold text-sm">
+            Simpan Transaksi
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 2: ATUR TANGGAL PERIODE UANG SAKU                               -->
+    <!-- ===================================================================== -->
+    <div id="modal-period" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="w-full max-w-sm bg-surface border border-neon/50 rounded-3xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-display text-base font-extrabold text-white">Atur Tanggal Periode</h3>
+          <button onclick="closePeriodModal()" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Tentukan rentang tanggal berlakunya uang sakumu (misal Rp500.000 untuk 14 hari / 2 minggu) agar batas aman harian terhitung otomatis.
+        </p>
+        <div class="grid grid-cols-3 gap-1.5">
+          <button type="button" onclick="setModalPeriodPreset(7)" class="py-2 rounded-xl bg-void border border-borderDiametric hover:border-neon text-xs font-bold text-white">7 Hari</button>
+          <button type="button" onclick="setModalPeriodPreset(14)" class="py-2 rounded-xl bg-magenta/20 border border-magenta text-xs font-bold text-pink-200">14 Hari</button>
+          <button type="button" onclick="setModalPeriodPreset(30)" class="py-2 rounded-xl bg-void border border-borderDiametric hover:border-neon text-xs font-bold text-white">30 Hari</button>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="text-[11px] text-slate-400 block mb-1">Tanggal Mulai</label>
+            <input id="period-modal-start" type="date" class="w-full px-3 py-2 rounded-xl bg-void border border-borderDiametric text-xs text-white" />
+          </div>
+          <div>
+            <label class="text-[11px] text-slate-400 block mb-1">Sampai Tanggal</label>
+            <input id="period-modal-end" type="date" class="w-full px-3 py-2 rounded-xl bg-void border border-borderDiametric text-xs text-white" />
+          </div>
+        </div>
+        <button onclick="savePeriodSettings()" class="w-full py-3 rounded-2xl btn-neon-pill font-bold text-xs">
+          Simpan Tanggal Periode
+        </button>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 3: KOREKSI SALDO CEPAT                                          -->
+    <!-- ===================================================================== -->
+    <div id="modal-reconcile" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="w-full max-w-sm bg-surface border border-magenta/50 rounded-3xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 id="reconcile-title" class="font-display text-base font-extrabold text-white">Koreksi Saldo</h3>
+          <button onclick="closeReconcileModal()" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Masukkan saldo asli di m-banking atau dompetmu sekarang agar catatan selisih receh langsung klop tanpa mengubah jatah amplop.
+        </p>
+        <input id="reconcile-input" type="number" min="0" class="w-full px-4 py-3 rounded-2xl bg-void border border-borderDiametric focus:border-neon focus:outline-none font-num text-lg font-extrabold text-neon" />
+        <button onclick="saveReconcile()" class="w-full py-3 rounded-2xl btn-neon-pill font-bold text-xs">
+          Samakan Saldo Sekarang
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- JAVASCRIPT ENGINE: STITI.ID (DUAL-MODE OFFLINE & LIVE FIREBASE v10)     -->
+  <!-- ======================================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendEmailVerification,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      onSnapshot,
+      arrayUnion
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    /**
+     * KONFIGURASI FIREBASE STITI.ID
+     * Ubah USE_FIREBASE = true setelah menempelkan firebaseConfig milikmu.
+     */
+    const USE_FIREBASE = true;
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpf5ujHyhRZMp5LY44jt_etkpZ1Ot-kHo",
+      authDomain: "stiti-id.firebaseapp.com",
+      projectId: "stiti-id",
+      storageBucket: "stiti-id.firebasestorage.app",
+      messagingSenderId: "680485296379",
+      appId: "1:680485296379:web:1468384a69c7e796ea385e"
+    };
+
+    let auth = null;
+    let db = null;
+    let unsubUser = null;
+    let unsubPartner = null;
+    let unsubRoom = null;
+    let unsubCode = null;
+
+    if (USE_FIREBASE) {
+      const fbApp = initializeApp(firebaseConfig);
+      auth = getAuth(fbApp);
+      db = getFirestore(fbApp);
+      document.getElementById('firebase-status-dot').className = 'w-2 h-2 rounded-full bg-neon animate-pulse';
+      document.getElementById('firebase-status-label').textContent = 'Terhubung ke Cloud Firebase Live Sync';
+      document.getElementById('btn-demo-verify').classList.add('hidden');
+      document.getElementById('btn-resend-verify').classList.remove('hidden');
+      document.getElementById('btn-demo-pair').classList.add('hidden');
+      document.getElementById('demo-partner-privacy-wrap').classList.add('hidden');
+    }
+
+    // =========================================================================
+    // BANK KUTIPAN PENGINGAT & MOTIVASI FINANSIAL (ULAMA, AHLI & EDUKATOR)
+    // =========================================================================
+    const WISDOM_QUOTES = [
+      {
+        cat: 'ulama',
+        badge: 'Ulama & Kebijaksanaan Islam',
+        quote: '“Sesungguhnya sifat boros itu bukan hanya pada harta yang banyak, tetapi membelanjakan harta bukan pada tempat dan kebutuhan yang semestinya.”',
+        author: 'Imam Al-Ghazali',
+        role: 'Ihya Ulumuddin — Kitab Kasb & Ma’isyah'
+      },
+      {
+        cat: 'ulama',
+        badge: 'Sahabat Nabi & Negarawan',
+        quote: '“Apakah setiap kali engkau menginginkan sesuatu, engkau langsung membelinya? Kendalikan seleramu sebelum ia mengendalikan hartamu.”',
+        author: 'Umar bin Khattab r.a.',
+        role: 'Nasihat Pengendalian Diri & Konsumsi'
+      },
+      {
+        cat: 'ulama',
+        badge: 'Ulama & Cendekiawan',
+        quote: '“Aturlah urusan duniamu dengan ilmu dan perhitungan yang cermat, agar engkau tidak bergantung dan meminta-minta kepada tangan orang lain.”',
+        author: 'Ali bin Abi Thalib r.a.',
+        role: 'Kemandirian & Tanggung Jawab Harta'
+      },
+      {
+        cat: 'ahli',
+        badge: 'Ahli Keuangan Klasik',
+        quote: '“Bayarlah dirimu sendiri terlebih dahulu. Sisihkan minimal sepersepuluh sampai seperlima dari setiap uang yang masuk sebelum engkau membayar kebutuhan apa pun.”',
+        author: 'George S. Clason',
+        role: 'Penulis The Richest Man in Babylon'
+      },
+      {
+        cat: 'ahli',
+        badge: 'Psikologi Keuangan Modern',
+        quote: '“Tabungan yang sejati adalah selisih antara egomu dan penghasilanmu. Kekayaan adalah uang yang tidak kamu habiskan hari ini demi kebebasan esok hari.”',
+        author: 'Morgan Housel',
+        role: 'Penulis The Psychology of Money'
+      },
+      {
+        cat: 'ahli',
+        badge: 'Sistem Amplop & Anggaran',
+        quote: '“Beri setiap rupiah nama dan tugasnya di awal periode sebelum uang itu keluar dari rekeningmu, agar kamu yang memerintah uang—bukan sebaliknya.”',
+        author: 'Dave Ramsey',
+        role: 'Perencana Keuangan & Pencetus Zero-Based Budget'
+      },
+      {
+        cat: 'influencer',
+        badge: 'Falsafah Keuangan Jawa',
+        quote: '“Gemi, Nastiti, Ngati-ati: Cermat mengatur porsi, teliti mencatat setiap transaksi, dan hati-hati menyiapkan cadangan untuk hari yang tak terduga.”',
+        author: 'Falsafah Leluhur Jawa',
+        role: 'Fondasi Filosofis Stiti.id'
+      },
+      {
+        cat: 'influencer',
+        badge: 'Edukator Finansial Anak Muda',
+        quote: '“Di usia 20-an, jangan cuma fokus menahan jajan—sisihkan juga pos khusus untuk upgrade skill, buku, dan relasi, karena itulah aset yang melipatgandakan penghasilanmu.”',
+        author: 'Prinsip Edukator Finansial & Li Ka-shing',
+        role: 'Strategi Pertumbuhan Usia 20-an'
+      }
+    ];
+
+    let currentWisdomCategory = 'all';
+    let currentWisdomIndex = 0;
+
+    function getFilteredQuotes() {
+      if (currentWisdomCategory === 'all') return WISDOM_QUOTES;
+      return WISDOM_QUOTES.filter(q => q.cat === currentWisdomCategory);
+    }
+
+    function renderWisdomCard() {
+      const list = getFilteredQuotes();
+      if (list.length === 0) return;
+      const item = list[currentWisdomIndex % list.length];
+      document.getElementById('wisdom-badge').textContent = item.badge;
+      document.getElementById('wisdom-quote').textContent = item.quote;
+      document.getElementById('wisdom-author').textContent = item.author;
+      document.getElementById('wisdom-role').textContent = item.role;
+    }
+
+    function filterWisdom(cat) {
+      currentWisdomCategory = cat;
+      currentWisdomIndex = 0;
+      ['all', 'ulama', 'ahli', 'influencer'].forEach(c => {
+        const btn = document.getElementById('wcat-' + c);
+        btn.className = c === cat
+          ? 'px-3.5 py-1.5 rounded-full text-xs font-bold bg-neon text-void tactile-btn'
+          : 'px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn';
+      });
+      renderWisdomCard();
+    }
+
+    function nextWisdomQuote() {
+      currentWisdomIndex += 1;
+      renderWisdomCard();
+    }
+
+    function openWisdomScreen() {
+      currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+      renderWisdomCard();
+      state.step = 'welcome';
+      renderScreens();
+    }
+
+    function enterMainApp() {
+      state.step = 'app';
+      saveUserState();
+      renderScreens();
+    }
+
+    // =========================================================================
+    // DATA BAWAAN MODEL HIBRIDA 4 AMPLOP & STATE APLIKASI
+    // =========================================================================
+    const DEFAULT_ENVELOPES = [
+      { id: 'env_wajib', name: 'Kebutuhan Wajib', pct: 50, allocated: 0, spent: 0, desc: 'Makan, bensin, kuota' },
+      { id: 'env_masadepan', name: 'Masa Depan', pct: 20, allocated: 0, spent: 0, desc: '12% Darurat • 8% Investasi' },
+      { id: 'env_upgrade', name: 'Upgrade Diri & Relasi', pct: 15, allocated: 0, spent: 0, desc: 'Buku, kelas, diskusi' },
+      { id: 'env_play', name: 'Guilt-Free Play', pct: 15, allocated: 0, spent: 0, desc: 'Jajan bebas terkunci' }
+    ];
+
+    const ENVELOPE_PALETTE = ['#25F91C', '#E11D8F', '#A855F7', '#38BDF8', '#FACC15', '#FB7185'];
+
+    function addDaysISO(baseISO, days) {
+      const d = baseISO ? new Date(baseISO) : new Date();
+      d.setDate(d.getDate() + days);
+      return d.toISOString().slice(0, 10);
+    }
+
+    function formatShortDateID(iso) {
+      if (!iso) return '-';
+      const d = new Date(iso + 'T00:00:00');
+      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    let state = {
+      step: 'auth', // 'auth' | 'verify' | 'pairing' | 'welcome' | 'app'
+      authMode: 'register',
+      maskScreen: false,
+      forceEomBanner: false,
+      user: {
+        uid: 'local_user',
+        name: '',
+        email: '',
+        verified: false,
+        myCode: '',
+        partnerCode: '',
+        partnerUid: '',
+        roomId: '',
+        paired: false,
+        shareNominal: false,
+        streak: 1,
+        lastLogDate: null,
+        period: {
+          amount: 0,
+          startDate: new Date().toISOString().slice(0, 10),
+          endDate: addDaysISO(null, 14)
+        },
+        wallets: { qris: 0, cash: 0 },
+        envelopes: JSON.parse(JSON.stringify(DEFAULT_ENVELOPES)),
+        transactions: []
+      },
+      partner: {
+        name: 'Partnermu',
+        code: 'P8R4T2',
+        streak: 3,
+        shareNominal: false,
+        envelopes: [
+          { id: 'p_1', name: 'Kebutuhan Wajib', pct: 50, allocated: 500000, spent: 180000 },
+          { id: 'p_2', name: 'Masa Depan', pct: 20, allocated: 200000, spent: 0 },
+          { id: 'p_3', name: 'Upgrade Diri & Relasi', pct: 15, allocated: 150000, spent: 45000 },
+          { id: 'p_4', name: 'Guilt-Free Play', pct: 15, allocated: 150000, spent: 125000 }
+        ]
+      },
+      feed: [
+        { time: 'Baru saja', text: 'Ruang Stiti.id siap. Catat uang masuk pertamamu (misal Rp500.000 untuk 2 minggu) agar pembagian 4 amplop bekerja.' }
+      ],
+      reconcileTarget: 'qris'
+    };
+
+    async function saveUserState() {
+      if (!USE_FIREBASE) {
+        localStorage.setItem('stiti_id_v2_state', JSON.stringify(state));
+        return;
+      }
+      if (auth.currentUser) {
+        await setDoc(doc(db, 'users', auth.currentUser.uid), state.user, { merge: true });
+      }
+    }
+
+    function loadLocalState() {
+      const saved = localStorage.getItem('stiti_id_v2_state');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          state = {
+            ...state,
+            ...parsed,
+            user: {
+              ...state.user,
+              ...(parsed.user || {}),
+              period: { ...state.user.period, ...((parsed.user && parsed.user.period) || {}) }
+            }
+          };
+        } catch (e) {
+          console.error('Gagal memuat state lokal:', e);
+        }
+      }
+    }
+
+    function formatRp(num, forceVisible = false) {
+      if (state.maskScreen && !forceVisible) return 'Rp ••••••';
+      const val = Math.round(Number(num) || 0);
+      return 'Rp ' + val.toLocaleString('id-ID');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
+    }
+
+    function generateSecretCode() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+
+    // =========================================================================
+    // FIREBASE REAL-TIME AUTH & LISTENER
+    // =========================================================================
+    if (USE_FIREBASE) {
+      onAuthStateChanged(auth, async (fbUser) => {
+        if (!fbUser) {
+          cleanupListeners();
+          state.step = 'auth';
+          renderScreens();
+          return;
+        }
+
+        const userRef = doc(db, 'users', fbUser.uid);
+        const snap = await getDoc(userRef);
+
+        if (!snap.exists()) {
+          const initialUser = {
+            ...state.user,
+            uid: fbUser.uid,
+            name: fbUser.displayName || fbUser.email.split('@')[0],
+            email: fbUser.email,
+            verified: fbUser.emailVerified,
+            myCode: generateSecretCode()
+          };
+          await setDoc(userRef, initialUser);
+          await setDoc(doc(db, 'codes', initialUser.myCode), {
+            uid: fbUser.uid,
+            name: initialUser.name,
+            targetCode: null,
+            roomId: null
+          });
+          state.user = initialUser;
+        } else {
+          state.user = { ...state.user, ...snap.data(), verified: fbUser.emailVerified };
+        }
+
+        if (!fbUser.emailVerified) {
+          state.step = 'verify';
+          renderScreens();
+        } else if (!state.user.paired) {
+          state.step = 'pairing';
+          renderScreens();
+          listenCodePairing(state.user.myCode);
+        } else {
+          // Masuk ke Halaman Pembuka Kutipan dulu setelah login
+          currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+          renderWisdomCard();
+          state.step = 'welcome';
+          renderScreens();
+          startLiveAppListeners();
+        }
+      });
+    }
+
+    function cleanupListeners() {
+      if (unsubUser) unsubUser();
+      if (unsubPartner) unsubPartner();
+      if (unsubRoom) unsubRoom();
+      if (unsubCode) unsubCode();
+    }
+
+    function listenCodePairing(myCode) {
+      if (!USE_FIREBASE || !myCode) return;
+      if (unsubCode) unsubCode();
+      unsubCode = onSnapshot(doc(db, 'codes', myCode), async (snap) => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (data.roomId && data.partnerUid) {
+          state.user.paired = true;
+          state.user.roomId = data.roomId;
+          state.user.partnerUid = data.partnerUid;
+          state.user.partnerCode = data.targetCode || '';
+          await saveUserState();
+          currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+          renderWisdomCard();
+          state.step = 'welcome';
+          renderScreens();
+          startLiveAppListeners();
+          showToast('Terkoneksi! Ruang Stiti.id resmi terkunci berdua.');
+        }
+      });
+    }
+
+    function startLiveAppListeners() {
+      if (!USE_FIREBASE || !state.user.uid) return;
+      cleanupListeners();
+
+      unsubUser = onSnapshot(doc(db, 'users', state.user.uid), (snap) => {
+        if (snap.exists()) {
+          state.user = { ...state.user, ...snap.data() };
+          renderApp();
+        }
+      });
+
+      if (state.user.partnerUid) {
+        unsubPartner = onSnapshot(doc(db, 'users', state.user.partnerUid), (snap) => {
+          if (snap.exists()) {
+            const p = snap.data();
+            state.partner = {
+              name: p.name || 'Teman',
+              code: p.myCode || state.user.partnerCode,
+              streak: p.streak || 1,
+              shareNominal: !!p.shareNominal,
+              envelopes: p.envelopes || []
+            };
+            renderApp();
+          }
+        });
+      }
+
+      if (state.user.roomId) {
+        unsubRoom = onSnapshot(doc(db, 'rooms', state.user.roomId), (snap) => {
+          if (snap.exists()) {
+            const r = snap.data();
+            state.feed = (r.feed || []).slice().reverse();
+            renderApp();
+          }
+        });
+      }
+    }
+
+    // =========================================================================
+    // ALUR DAFTAR, VERIFIKASI EMAIL & CROSS-PAIRING 2 ARAH
+    // =========================================================================
+    function switchAuthMode(mode) {
+      state.authMode = mode;
+      const btnReg = document.getElementById('tab-btn-register');
+      const btnLog = document.getElementById('tab-btn-login');
+      const nameWrap = document.getElementById('field-name-wrap');
+      const submitBtn = document.getElementById('auth-submit-btn');
+
+      if (mode === 'register') {
+        btnReg.className = 'py-2.5 text-xs font-bold rounded-xl btn-neon-pill';
+        btnLog.className = 'py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
+        nameWrap.classList.remove('hidden');
+        submitBtn.textContent = 'Daftar & Kirim Verifikasi Email';
+      } else {
+        btnLog.className = 'py-2.5 text-xs font-bold rounded-xl btn-neon-pill';
+        btnReg.className = 'py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
+        nameWrap.classList.add('hidden');
+        submitBtn.textContent = 'Masuk ke Akun';
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('auth-name').value.trim() || 'Pengguna';
+      const email = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+
+      if (USE_FIREBASE) {
+        try {
+          if (state.authMode === 'register') {
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            const myCode = generateSecretCode();
+            const newUser = {
+              ...state.user,
+              uid: cred.user.uid,
+              name,
+              email,
+              verified: false,
+              myCode
+            };
+            await setDoc(doc(db, 'users', cred.user.uid), newUser);
+            await setDoc(doc(db, 'codes', myCode), {
+              uid: cred.user.uid,
+              name,
+              targetCode: null,
+              roomId: null
+            });
+            await sendEmailVerification(cred.user);
+            showToast('Email verifikasi dikirim ke ' + email);
+          } else {
+            await signInWithEmailAndPassword(auth, email, password);
+            showToast('Berhasil masuk!');
+          }
+        } catch (err) {
+          showToast('Error: ' + err.message);
+        }
+        return;
+      }
+
+      if (state.authMode === 'register') {
+        state.user.name = name;
+        state.user.email = email;
+        state.user.verified = false;
+        state.user.myCode = generateSecretCode();
+        state.step = 'verify';
+        showToast('Tautan verifikasi dikirim ke ' + email);
+      } else {
+        if (!state.user.email) {
+          state.user.name = email.split('@')[0];
+          state.user.email = email;
+          state.user.myCode = generateSecretCode();
+        }
+        if (state.user.paired) {
+          currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+          renderWisdomCard();
+          state.step = 'welcome';
+        } else {
+          state.step = state.user.verified ? 'pairing' : 'verify';
+        }
+        showToast('Selamat datang kembali di Stiti.id!');
+      }
+      await saveUserState();
+      renderScreens();
+    }
+
+    async function checkEmailVerification(isDemoBypass) {
+      if (USE_FIREBASE && auth.currentUser) {
+        await auth.currentUser.reload();
+        if (auth.currentUser.emailVerified) {
+          state.user.verified = true;
+          await saveUserState();
+          state.step = 'pairing';
+          renderScreens();
+          listenCodePairing(state.user.myCode);
+          showToast('Email sah terverifikasi! Sekarang tukar kode dengan temanmu.');
+        } else {
+          showToast('Email belum terverifikasi. Cek folder Inbox atau Spam emailmu.');
+        }
+        return;
+      }
+
+      if (isDemoBypass) {
+        state.user.verified = true;
+        state.step = 'pairing';
+        await saveUserState();
+        renderScreens();
+        showToast('Email terverifikasi! Sekarang tukar kode 2 arah.');
+      }
+    }
+
+    async function resendVerificationEmail() {
+      if (USE_FIREBASE && auth.currentUser) {
+        try {
+          await sendEmailVerification(auth.currentUser);
+          showToast('Email verifikasi baru telah dikirim!');
+        } catch (err) {
+          showToast('Tunggu sebentar sebelum mengirim ulang.');
+        }
+      }
+    }
+
+    function copyMyCode() {
+      navigator.clipboard?.writeText(state.user.myCode);
+      showToast('Kode ' + state.user.myCode + ' disalin! Kirim ke temanmu.');
+    }
+
+    async function submitPartnerCode() {
+      const inputCode = document.getElementById('input-partner-code').value.trim().toUpperCase();
+      if (inputCode.length < 6) {
+        showToast('Masukkan 6 karakter kode rahasia temanmu.');
+        return;
+      }
+      if (inputCode === state.user.myCode) {
+        showToast('Itu kodemu sendiri! Masukkan kode milik temanmu.');
+        return;
+      }
+
+      if (USE_FIREBASE) {
+        try {
+          const partnerCodeRef = doc(db, 'codes', inputCode);
+          const partnerSnap = await getDoc(partnerCodeRef);
+
+          if (!partnerSnap.exists()) {
+            showToast('Kode teman tidak ditemukan. Cek kembali hurufnya.');
+            return;
+          }
+
+          const partnerData = partnerSnap.data();
+          if (partnerData.roomId && partnerData.targetCode !== state.user.myCode) {
+            showToast('Kode temanmu sudah terkunci dengan akun lain!');
+            return;
+          }
+
+          const myCodeRef = doc(db, 'codes', state.user.myCode);
+          await updateDoc(myCodeRef, { targetCode: inputCode });
+
+          if (partnerData.targetCode === state.user.myCode) {
+            const roomId = [state.user.uid, partnerData.uid].sort().join('_');
+            await setDoc(doc(db, 'rooms', roomId), {
+              members: [state.user.uid, partnerData.uid],
+              locked: true,
+              feed: [{
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+                text: `🔒 ${state.user.name} & ${partnerData.name} resmi terhubung berdua di Stiti.id!`
+              }]
+            }, { merge: true });
+
+            await updateDoc(myCodeRef, { roomId, partnerUid: partnerData.uid });
+            await updateDoc(partnerCodeRef, { roomId, partnerUid: state.user.uid });
+          } else {
+            document.getElementById('partner-ack-text').textContent =
+              `Kode ${partnerData.name} valid! Menunggu ${partnerData.name} memasukkan kodemu (${state.user.myCode})...`;
+            showToast(`Kode ${partnerData.name} cocok! Tunggu temanmu input kodemu.`);
+          }
+        } catch (err) {
+          showToast('Gagal menghubungkan: ' + err.message);
+        }
+        return;
+      }
+
+      state.user.partnerCode = inputCode;
+      state.partner.code = inputCode;
+      state.user.paired = true;
+      currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+      renderWisdomCard();
+      state.step = 'welcome';
+      await saveUserState();
+      renderScreens();
+      showToast('Berhasil terhubung berdua! Simak pengingat sebelum masuk.');
+    }
+
+    function simulateFullPairing() {
+      const dummyPartnerCode = generateSecretCode();
+      document.getElementById('input-partner-code').value = dummyPartnerCode;
+      submitPartnerCode();
+    }
+
+    async function logoutUser() {
+      if (!confirm('Keluar dari akun saat ini?')) return;
+      if (USE_FIREBASE) {
+        cleanupListeners();
+        await signOut(auth);
+      } else {
+        localStorage.removeItem('stiti_id_v2_state');
+        location.reload();
+      }
+    }
+
+    // =========================================================================
+    // MESIN KEUANGAN: PERIODE TANGGAL, AUTO-SPLIT, PENGELUARAN & KOREKSI
+    // =========================================================================
+    let modalTxType = 'OUT';
+    let modalTxWallet = 'qris';
+    let modalTxEnvelopeId = '';
+
+    function openTxModal() {
+      document.getElementById('modal-tx').classList.remove('hidden');
+      document.getElementById('tx-amount').value = '';
+      document.getElementById('tx-note').value = '';
+      const todayISO = new Date().toISOString().slice(0, 10);
+      document.getElementById('tx-start-date').value = todayISO;
+      document.getElementById('tx-end-date').value = addDaysISO(todayISO, 14);
+      if (state.user.envelopes.length > 0) {
+        modalTxEnvelopeId = state.user.envelopes[0].id;
+      }
+      setTxType('OUT');
+      setTxWallet('qris');
+      renderTxEnvelopePills();
+    }
+
+    function closeTxModal() {
+      document.getElementById('modal-tx').classList.add('hidden');
+    }
+
+    function applyDurationPreset(days) {
+      const startVal = document.getElementById('tx-start-date').value || new Date().toISOString().slice(0, 10);
+      document.getElementById('tx-start-date').value = startVal;
+      document.getElementById('tx-end-date').value = addDaysISO(startVal, days);
+      updateAutoSplitPreview();
+      showToast(`Durasi disetel untuk ${days} hari.`);
+    }
+
+    function setTxType(type) {
+      modalTxType = type;
+      ['OUT', 'IN', 'TRANSFER'].forEach(t => {
+        const btn = document.getElementById('tx-type-' + t);
+        btn.className = t === type
+          ? 'py-2 rounded-xl text-xs font-bold btn-neon-pill'
+          : 'py-2 rounded-xl text-xs font-bold text-slate-400';
+      });
+
+      const envWrap = document.getElementById('tx-envelope-wrap');
+      const splitInfo = document.getElementById('tx-autosplit-info');
+      const walletLabel = document.getElementById('tx-wallet-label');
+
+      if (type === 'OUT') {
+        envWrap.classList.remove('hidden');
+        splitInfo.classList.add('hidden');
+        walletLabel.textContent = 'Bayar Pakai Apa?';
+      } else if (type === 'IN') {
+        envWrap.classList.add('hidden');
+        splitInfo.classList.remove('hidden');
+        walletLabel.textContent = 'Uang Masuk ke Mana?';
+        updateAutoSplitPreview();
+      } else {
+        envWrap.classList.add('hidden');
+        splitInfo.classList.add('hidden');
+        walletLabel.textContent = 'Pindah Dari Mana?';
+      }
+    }
+
+    function setTxWallet(wallet) {
+      modalTxWallet = wallet;
+      const btnQris = document.getElementById('tx-wallet-qris');
+      const btnCash = document.getElementById('tx-wallet-cash');
+      const activeCls = 'py-2.5 px-3 rounded-2xl border border-neon bg-neon/15 text-neon text-xs font-bold flex items-center justify-center gap-2 tactile-btn';
+      const idleCls = 'py-2.5 px-3 rounded-2xl border border-borderDiametric bg-void text-slate-400 text-xs font-bold flex items-center justify-center gap-2 tactile-btn';
+
+      btnQris.className = wallet === 'qris' ? activeCls : idleCls;
+      btnCash.className = wallet === 'cash' ? activeCls : idleCls;
+    }
+
+    function renderTxEnvelopePills() {
+      const container = document.getElementById('tx-envelope-pills');
+      container.innerHTML = state.user.envelopes.map(env => {
+        const isSelected = env.id === modalTxEnvelopeId;
+        const sisa = env.allocated - env.spent;
+        return `
+          <button type="button" onclick="selectTxEnvelope('${env.id}')"
+            class="p-3 rounded-2xl border text-left tactile-btn ${isSelected ? 'border-neon bg-neon/15 text-white' : 'border-borderDiametric bg-void text-slate-400'}">
+            <div class="text-xs font-bold truncate">${env.name}</div>
+            <div class="font-num text-[10px] ${sisa <= 0 ? 'text-magenta' : 'text-neon'} mt-0.5">Sisa: ${formatRp(sisa)}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectTxEnvelope(id) {
+      modalTxEnvelopeId = id;
+      renderTxEnvelopePills();
+    }
+
+    document.getElementById('tx-amount').addEventListener('input', () => {
+      if (modalTxType === 'IN') updateAutoSplitPreview();
+    });
+
+    function getDaysBetween(startISO, endISO) {
+      const s = new Date(startISO + 'T00:00:00');
+      const e = new Date(endISO + 'T00:00:00');
+      const diff = Math.round((e - s) / (1000 * 60 * 60 * 24));
+      return Math.max(1, diff);
+    }
+
+    function updateAutoSplitPreview() {
+      const amt = Number(document.getElementById('tx-amount').value) || 0;
+      const startISO = document.getElementById('tx-start-date').value;
+      const endISO = document.getElementById('tx-end-date').value;
+      const preview = document.getElementById('tx-autosplit-preview');
+      if (amt <= 0) {
+        preview.textContent = 'Masukkan nominal untuk melihat pembagian otomatis ke amplopmu.';
+        return;
+      }
+      const days = getDaysBetween(startISO, endISO);
+      const daily = Math.round(amt / days);
+      const parts = state.user.envelopes.map(e => `${e.name} (${e.pct}%): Rp ${Math.round(amt * e.pct / 100).toLocaleString('id-ID')}`);
+      preview.innerHTML = `Durasi <strong>${days} hari</strong> (jatah aman <strong>Rp ${daily.toLocaleString('id-ID')}/hari</strong>)<br>${parts.join(' • ')}`;
+    }
+
+    async function pushSharedFeed(text) {
+      const item = {
+        time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        text
+      };
+      if (USE_FIREBASE && state.user.roomId) {
+        await updateDoc(doc(db, 'rooms', state.user.roomId), {
+          feed: arrayUnion(item)
+        });
+      } else {
+        state.feed.unshift(item);
+      }
+    }
+
+    async function submitTransaction(e) {
+      e.preventDefault();
+      const amount = Number(document.getElementById('tx-amount').value);
+      const note = document.getElementById('tx-note').value.trim();
+      if (!amount || amount <= 0) return;
+
+      const today = new Date().toISOString().slice(0, 10);
+      if (state.user.lastLogDate !== today) {
+        if (state.user.lastLogDate) state.user.streak += 1;
+        state.user.lastLogDate = today;
+      }
+
+      const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+      if (modalTxType === 'IN') {
+        const startISO = document.getElementById('tx-start-date').value || today;
+        const endISO = document.getElementById('tx-end-date').value || addDaysISO(startISO, 14);
+        const days = getDaysBetween(startISO, endISO);
+
+        state.user.wallets[modalTxWallet] += amount;
+        state.user.period = {
+          amount: (state.user.period?.amount || 0) + amount,
+          startDate: startISO,
+          endDate: endISO
+        };
+
+        state.user.envelopes.forEach(env => {
+          env.allocated += Math.round((amount * env.pct) / 100);
+        });
+
+        state.user.transactions.unshift({
+          id: Date.now(),
+          type: 'IN',
+          wallet: modalTxWallet,
+          envelopeName: `Auto-Split (${days} Hari)`,
+          amount,
+          note: note || `Uang Saku (${formatShortDateID(startISO)} - ${formatShortDateID(endISO)})`,
+          date: `${today} ${timeStr}`
+        });
+        await pushSharedFeed(`✨ ${state.user.name} mencatat uang masuk untuk periode ${days} hari & auto-split ${state.user.envelopes.length} amplop.`);
+        showToast(`Uang masuk terbagi otomatis untuk ${days} hari!`);
+
+      } else if (modalTxType === 'OUT') {
+        const env = state.user.envelopes.find(x => x.id === modalTxEnvelopeId);
+        if (!env) return;
+
+        state.user.wallets[modalTxWallet] = Math.max(0, state.user.wallets[modalTxWallet] - amount);
+        env.spent += amount;
+
+        state.user.transactions.unshift({
+          id: Date.now(),
+          type: 'OUT',
+          wallet: modalTxWallet,
+          envelopeName: env.name,
+          amount,
+          note: note || env.name,
+          date: `${today} ${timeStr}`
+        });
+
+        const sisa = env.allocated - env.spent;
+        if (sisa <= 0) {
+          showToast(`Peringatan! Jatah ${env.name} sudah habis.`);
+        } else {
+          showToast(`Tercatat di ${env.name} (${modalTxWallet.toUpperCase()}).`);
+        }
+
+      } else if (modalTxType === 'TRANSFER') {
+        const fromW = modalTxWallet;
+        const toW = fromW === 'qris' ? 'cash' : 'qris';
+        state.user.wallets[fromW] = Math.max(0, state.user.wallets[fromW] - amount);
+        state.user.wallets[toW] += amount;
+
+        state.user.transactions.unshift({
+          id: Date.now(),
+          type: 'TRANSFER',
+          wallet: fromW,
+          envelopeName: `${fromW.toUpperCase()} ➔ ${toW.toUpperCase()}`,
+          amount,
+          note: note || 'Pindah Kantong / Tarik Tunai',
+          date: `${today} ${timeStr}`
+        });
+        showToast(`Saldo dipindah dari ${fromW.toUpperCase()} ke ${toW.toUpperCase()}.`);
+      }
+
+      state.user.transactions = state.user.transactions.slice(0, 80);
+      await saveUserState();
+      closeTxModal();
+      renderApp();
+    }
+
+    // Modal Atur Tanggal Periode
+    function openPeriodModal() {
+      document.getElementById('period-modal-start').value = state.user.period?.startDate || new Date().toISOString().slice(0, 10);
+      document.getElementById('period-modal-end').value = state.user.period?.endDate || addDaysISO(null, 14);
+      document.getElementById('modal-period').classList.remove('hidden');
+    }
+
+    function closePeriodModal() {
+      document.getElementById('modal-period').classList.add('hidden');
+    }
+
+    function setModalPeriodPreset(days) {
+      const startVal = document.getElementById('period-modal-start').value || new Date().toISOString().slice(0, 10);
+      document.getElementById('period-modal-start').value = startVal;
+      document.getElementById('period-modal-end').value = addDaysISO(startVal, days);
+    }
+
+    async function savePeriodSettings() {
+      const s = document.getElementById('period-modal-start').value;
+      const e = document.getElementById('period-modal-end').value;
+      if (!s || !e) return;
+      state.user.period.startDate = s;
+      state.user.period.endDate = e;
+      await saveUserState();
+      closePeriodModal();
+      renderApp();
+      showToast('Tanggal periode anggaran diperbarui!');
+    }
+
+    // Koreksi Saldo Cepat
+    function openReconcileModal(walletKey) {
+      state.reconcileTarget = walletKey;
+      document.getElementById('reconcile-title').textContent =
+        walletKey === 'qris' ? 'Koreksi Saldo Rekening / QRIS' : 'Koreksi Saldo Dompet Cash';
+      document.getElementById('reconcile-input').value = state.user.wallets[walletKey];
+      document.getElementById('modal-reconcile').classList.remove('hidden');
+    }
+
+    function closeReconcileModal() {
+      document.getElementById('modal-reconcile').classList.add('hidden');
+    }
+
+    async function saveReconcile() {
+      const val = Number(document.getElementById('reconcile-input').value);
+      if (isNaN(val) || val < 0) return;
+      state.user.wallets[state.reconcileTarget] = val;
+      await saveUserState();
+      closeReconcileModal();
+      renderApp();
+      showToast('Saldo fisik berhasil disamakan!');
+    }
+
+    // =========================================================================
+    // KUSTOMISASI AMPLOP (OTOMATIS HITUNG ULANG RUPIAH) & PRIVASI GANDA
+    // =========================================================================
+    function toggleScreenMask() {
+      state.maskScreen = !state.maskScreen;
+      if (!USE_FIREBASE) localStorage.setItem('stiti_id_v2_state', JSON.stringify(state));
+      renderApp();
+      showToast(state.maskScreen ? 'Layar disensor (Mode Aman).' : 'Nominal ditampilkan.');
+    }
+
+    async function toggleShareNominal() {
+      state.user.shareNominal = !state.user.shareNominal;
+      await saveUserState();
+      renderApp();
+      showToast(state.user.shareNominal ? 'Mode Terbuka: Teman bisa lihat nominal asli.' : 'Mode Privasi: Teman hanya lihat persentase.');
+    }
+
+    function toggleDemoPartnerPrivacy() {
+      state.partner.shareNominal = !state.partner.shareNominal;
+      saveUserState();
+      renderApp();
+    }
+
+    function toggleEndOfMonthPreview() {
+      state.forceEomBanner = !state.forceEomBanner;
+      renderApp();
+      showToast(state.forceEomBanner ? 'Simulasi peringatan akhir bulan diaktifkan.' : 'Mode tanggal normal aktif.');
+    }
+
+    async function sendNudgeToPartner() {
+      await pushSharedFeed(`⚡ ${state.user.name} mengirim colek pengingat stabilitas budget ke ${state.partner.name}!`);
+      renderApp();
+      showToast('Pengingat terkirim ke dashboard temanmu!');
+    }
+
+    async function sendCustomNudge() {
+      const inp = document.getElementById('nudge-custom-input');
+      const txt = inp.value.trim();
+      if (!txt) return;
+      await pushSharedFeed(`💬 ${state.user.name}: "${txt}"`);
+      inp.value = '';
+      renderApp();
+      showToast('Catatan terkirim!');
+    }
+
+    // Editor Kustomisasi Amplop dengan Perhitungan Ulang Otomatis
+    let draftEnvelopes = [];
+
+    function getActiveBudgetPool() {
+      const allocSum = state.user.envelopes.reduce((s, e) => s + (Number(e.allocated) || 0), 0);
+      if (allocSum > 0) return allocSum;
+      const walletSum = (Number(state.user.wallets.qris) || 0) + (Number(state.user.wallets.cash) || 0);
+      return walletSum;
+    }
+
+    function renderEnvelopeEditor() {
+      draftEnvelopes = JSON.parse(JSON.stringify(state.user.envelopes));
+      updateEditorDOM();
+    }
+
+    function updateEditorDOM() {
+      const container = document.getElementById('custom-envelopes-editor');
+      const pool = getActiveBudgetPool();
+      const basePool = pool > 0 ? pool : 1000000;
+
+      container.innerHTML = draftEnvelopes.map((env, idx) => {
+        const previewRp = Math.round((basePool * (Number(env.pct) || 0)) / 100);
+        return `
+          <div class="p-3.5 rounded-2xl bg-void border border-borderDiametric flex items-center justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <input type="text" value="${env.name}" onchange="updateDraftName(${idx}, this.value)"
+                class="w-full bg-transparent text-xs font-bold text-white focus:outline-none border-b border-transparent focus:border-neon pb-0.5" />
+              <span id="draft-rp-preview-${idx}" class="font-num text-[11px] text-pink-300 mt-1 block">
+                ${pool > 0 ? 'Jatah otomatis: ' : 'Simulasi Rp1 jt: '}Rp ${previewRp.toLocaleString('id-ID')}
+              </span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <input type="number" min="0" max="100" value="${env.pct}" oninput="updateDraftPct(${idx}, this.value)"
+                class="w-16 px-2.5 py-1.5 rounded-xl bg-surface border border-borderDiametric text-right font-num text-xs font-extrabold text-neon focus:border-neon focus:outline-none" />
+              <span class="text-xs font-bold text-slate-400">%</span>
+              ${draftEnvelopes.length > 2 ? `
+                <button onclick="removeDraftEnvelope(${idx})" class="w-7 h-7 rounded-lg bg-red-500/15 text-red-400 hover:bg-red-500/30 text-xs font-bold ml-1">✕</button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+      validateDraftPct();
+    }
+
+    function updateDraftName(idx, val) {
+      draftEnvelopes[idx].name = val;
+    }
+
+    function updateDraftPct(idx, val) {
+      draftEnvelopes[idx].pct = Number(val) || 0;
+      const pool = getActiveBudgetPool();
+      const basePool = pool > 0 ? pool : 1000000;
+      const previewRp = Math.round((basePool * draftEnvelopes[idx].pct) / 100);
+      const el = document.getElementById(`draft-rp-preview-${idx}`);
+      if (el) {
+        el.textContent = `${pool > 0 ? 'Jatah otomatis: ' : 'Simulasi Rp1 jt: '}Rp ${previewRp.toLocaleString('id-ID')}`;
+      }
+      validateDraftPct();
+    }
+
+    function addNewEnvelopeRow() {
+      draftEnvelopes.push({
+        id: 'env_' + Date.now(),
+        name: 'Pos Kebutuhan Baru',
+        pct: 0,
+        allocated: 0,
+        spent: 0,
+        desc: 'Pos kustom'
+      });
+      updateEditorDOM();
+    }
+
+    function removeDraftEnvelope(idx) {
+      draftEnvelopes.splice(idx, 1);
+      updateEditorDOM();
+    }
+
+    function validateDraftPct() {
+      const total = draftEnvelopes.reduce((sum, e) => sum + (Number(e.pct) || 0), 0);
+      const badge = document.getElementById('pct-total-badge');
+      const saveBtn = document.getElementById('btn-save-envelopes');
+
+      badge.textContent = `Total: ${total}%`;
+      if (total === 100) {
+        badge.className = 'font-num px-3 py-1.5 rounded-full bg-neon/20 text-neon text-xs font-extrabold';
+        saveBtn.disabled = false;
+        saveBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+      } else {
+        badge.className = 'font-num px-3 py-1.5 rounded-full bg-magenta/20 text-pink-300 text-xs font-extrabold';
+        saveBtn.disabled = true;
+        saveBtn.classList.add('opacity-40', 'cursor-not-allowed');
+      }
+    }
+
+    async function saveEnvelopeConfig() {
+      const pool = getActiveBudgetPool();
+      // Otomatis hitung ulang nominal allocated setiap amplop sesuai persentase baru!
+      draftEnvelopes.forEach(env => {
+        env.allocated = Math.round((pool * (Number(env.pct) || 0)) / 100);
+      });
+      state.user.envelopes = draftEnvelopes;
+      await saveUserState();
+      renderApp();
+      showToast(pool > 0
+        ? 'Porsi disimpan & nominal rupiah tiap amplop otomatis diperbarui!'
+        : 'Porsi disimpan! Akan langsung membagi otomatis saat uang masuk.');
+    }
+
+    // Export Laporan Excel (.xlsx) Multi-Sheet via SheetJS
+    function exportToExcel() {
+      if (typeof XLSX === 'undefined') {
+        showToast('Library Excel belum termuat, pastikan koneksi internet aktif.');
+        return;
+      }
+      const monthName = new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+      const summaryRows = state.user.envelopes.map(e => ({
+        Nama_Amplop: e.name,
+        Persentase: e.pct + '%',
+        Jatah_Alokasi_Rp: e.allocated,
+        Terpakai_Rp: e.spent,
+        Sisa_Saldo_Rp: Math.max(0, e.allocated - e.spent)
+      }));
+
+      const txRows = state.user.transactions.map(t => ({
+        Waktu: t.date,
+        Tipe: t.type,
+        Sumber_Dana: t.wallet.toUpperCase(),
+        Amplop: t.envelopeName,
+        Nominal_Rp: t.amount,
+        Keterangan: t.note
+      }));
+
+      const wb = XLSX.utils.book_new();
+      const wsSummary = XLSX.utils.json_to_sheet(summaryRows);
+      const wsTx = XLSX.utils.json_to_sheet(txRows.length ? txRows : [{ Info: 'Belum ada transaksi tercatat bulan ini' }]);
+      XLSX.utils.book_append_sheet(wb, wsSummary, 'Ringkasan_4_Amplop');
+      XLSX.utils.book_append_sheet(wb, wsTx, 'Riwayat_Transaksi');
+      XLSX.writeFile(wb, `Rekap_Stiti_id_${state.user.name || 'User'}_${monthName.replace(/\s+/g, '_')}.xlsx`);
+      showToast(`Rekap Excel (${monthName}) berhasil diunduh!`);
+    }
+
+    // =========================================================================
+    // RENDER GRAFIK VISUAL & EVALUASI OTOMATIS
+    // =========================================================================
+    function renderVisualCharts() {
+      // 1. Donut Chart Komposisi 4 Amplopku
+      const donutSvg = document.getElementById('my-donut-svg');
+      const legendEl = document.getElementById('donut-legend');
+      const radius = 58;
+      const circumference = 2 * Math.PI * radius;
+      let cumulativePct = 0;
+
+      const circles = state.user.envelopes.map((env, idx) => {
+        const color = ENVELOPE_PALETTE[idx % ENVELOPE_PALETTE.length];
+        const pct = Math.max(0, Number(env.pct) || 0);
+        const dash = (pct / 100) * circumference;
+        const offset = -((cumulativePct / 100) * circumference);
+        cumulativePct += pct;
+        return `<circle cx="80" cy="80" r="${radius}" fill="none" stroke="${color}" stroke-width="18"
+                  stroke-dasharray="${dash} ${circumference}" stroke-dashoffset="${offset}" class="transition-all duration-500"/>`;
+      }).join('');
+
+      donutSvg.innerHTML = `<circle cx="80" cy="80" r="${radius}" fill="none" stroke="#211238" stroke-width="18"/>` + circles;
+
+      const totalSisa = state.user.envelopes.reduce((s, e) => s + Math.max(0, e.allocated - e.spent), 0);
+      document.getElementById('donut-center-val').textContent = formatRp(totalSisa);
+
+      legendEl.innerHTML = state.user.envelopes.map((env, idx) => {
+        const color = ENVELOPE_PALETTE[idx % ENVELOPE_PALETTE.length];
+        return `
+          <div class="flex items-center gap-1.5 truncate">
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${color}"></span>
+            <span class="text-slate-300 truncate">${env.name}</span>
+            <span class="font-num font-bold text-white ml-auto">${env.pct}%</span>
+          </div>
+        `;
+      }).join('');
+
+      // 2. Grafik Batang Perbandingan Berdua (Kamu vs Teman)
+      const compEl = document.getElementById('comparison-bar-chart');
+      const maxLen = Math.max(state.user.envelopes.length, state.partner.envelopes.length);
+      let barsHTML = '';
+
+      for (let i = 0; i < maxLen; i++) {
+        const myEnv = state.user.envelopes[i];
+        const ptEnv = state.partner.envelopes[i];
+        const label = myEnv ? myEnv.name : (ptEnv ? ptEnv.name : `Pos ${i + 1}`);
+
+        const myPct = myEnv
+          ? (myEnv.allocated > 0 ? Math.max(0, Math.round(((myEnv.allocated - myEnv.spent) / myEnv.allocated) * 100)) : 100)
+          : 0;
+        const ptPct = ptEnv
+          ? (ptEnv.allocated > 0 ? Math.max(0, Math.round(((ptEnv.allocated - ptEnv.spent) / ptEnv.allocated) * 100)) : 100)
+          : 0;
+
+        barsHTML += `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-bold text-slate-200">${label}</span>
+              <div class="font-num text-[11px] flex items-center gap-2">
+                <span class="text-neon font-bold">${myEnv ? myPct + '%' : '-'}</span>
+                <span class="text-slate-600">vs</span>
+                <span class="text-magenta font-bold">${ptEnv ? ptPct + '%' : '-'}</span>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <div class="w-full h-2 rounded-full bg-void overflow-hidden">
+                <div class="h-full bg-neon rounded-full transition-all duration-500" style="width:${myPct}%"></div>
+              </div>
+              <div class="w-full h-2 rounded-full bg-void overflow-hidden">
+                <div class="h-full bg-magenta rounded-full transition-all duration-500" style="width:${ptPct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      compEl.innerHTML = barsHTML;
+    }
+
+    function renderEvaluationDashboard() {
+      const totalAlloc = state.user.envelopes.reduce((s, e) => s + e.allocated, 0);
+      const totalSpent = state.user.envelopes.reduce((s, e) => s + e.spent, 0);
+      const totalSisa = Math.max(0, totalAlloc - totalSpent);
+
+      const startISO = state.user.period?.startDate || new Date().toISOString().slice(0, 10);
+      const endISO = state.user.period?.endDate || addDaysISO(startISO, 14);
+      const totalDays = getDaysBetween(startISO, endISO);
+      const todayISO = new Date().toISOString().slice(0, 10);
+      const elapsedDays = Math.min(totalDays, Math.max(1, getDaysBetween(startISO, todayISO)));
+      const remainingDays = Math.max(1, getDaysBetween(todayISO, endISO));
+
+      const safeDailyLimit = totalAlloc > 0 ? Math.round(totalAlloc / totalDays) : 0;
+      const currentDailyBurn = Math.round(totalSpent / elapsedDays);
+
+      document.getElementById('eval-total-in').textContent = formatRp(totalAlloc);
+      document.getElementById('eval-total-out').textContent = formatRp(totalSpent);
+      document.getElementById('eval-daily-burn').textContent = formatRp(currentDailyBurn);
+
+      const goodMessages = [];
+      const badMessages = [];
+      let score = 80;
+
+      // Evaluasi 1: Apakah sudah ada uang masuk?
+      if (totalAlloc === 0) {
+        score = 65;
+        badMessages.push('Belum ada pemasukan tercatat di periode aktif. Segera catat uang sakumu (misal Rp500.000 untuk 2 minggu) agar analisis harian berjalan akurat.');
+      } else {
+        // Evaluasi 2: Amplop Masa Depan (Clason)
+        const futureEnv = state.user.envelopes.find(e => e.name.toLowerCase().includes('masa depan') || e.id === 'env_masadepan');
+        if (futureEnv) {
+          if (futureEnv.spent === 0 && futureEnv.allocated > 0) {
+            score += 10;
+            goodMessages.push(`Luar biasa! Pos "${futureEnv.name}" (${formatRp(futureEnv.allocated)}) masih utuh 100% dan berhasil diamankan di awal.`);
+          } else if (futureEnv.spent > 0) {
+            score -= 15;
+            badMessages.push(`Perhatian: Pos "${futureEnv.name}" sudah terpakai ${formatRp(futureEnv.spent)}. Pastikan hanya digunakan untuk kondisi darurat sesungguhnya.`);
+          }
+        }
+
+        // Evaluasi 3: Laju pengeluaran harian vs batas aman harian
+        if (currentDailyBurn <= safeDailyLimit) {
+          score += 8;
+          goodMessages.push(`Ritme belanjamu sehat! Rata-rata pengeluaran (${formatRp(currentDailyBurn)}/hari) masih di bawah batas aman (${formatRp(safeDailyLimit)}/hari).`);
+        } else {
+          score -= 12;
+          badMessages.push(`Laju belanja terlalu cepat (${formatRp(currentDailyBurn)}/hari vs batas aman ${formatRp(safeDailyLimit)}/hari). Sisa ${remainingDays} hari ke depan perlu pengetatan.`);
+        }
+
+        // Evaluasi 4: Cek tiap amplop yang kritis (< 25%) atau sangat aman (> 60%)
+        state.user.envelopes.forEach(env => {
+          if (env.allocated <= 0) return;
+          const pctLeft = Math.round(((env.allocated - env.spent) / env.allocated) * 100);
+          if (pctLeft < 25) {
+            score -= 8;
+            badMessages.push(`Pos "${env.name}" masuk zona kritis (tersisa ${pctLeft}% / ${formatRp(Math.max(0, env.allocated - env.spent))}). Rem pengeluaran di kategori ini.`);
+          } else if (pctLeft >= 65 && env.spent > 0) {
+            goodMessages.push(`Pos "${env.name}" terjaga sangat baik dengan sisa ${pctLeft}% (${formatRp(env.allocated - env.spent)}).`);
+          }
+        });
+      }
+
+      // Evaluasi 5: Streak Konsistensi
+      if (state.user.streak >= 3) {
+        score += 5;
+        goodMessages.push(`Disiplin pencatatan aktif selama ${state.user.streak} hari! Kebiasaan mencatat mencegah kebocoran uang receh.`);
+      }
+
+      if (goodMessages.length === 0) {
+        goodMessages.push('Akun Stiti.id sudah terhubung berdua. Mulai catat transaksi harianmu untuk membangun skor positif.');
+      }
+      if (badMessages.length === 0) {
+        badMessages.push('Tidak ada pos anggaran yang bocor saat ini. Pertahankan disiplinmu hingga akhir periode!');
+      }
+
+      score = Math.min(100, Math.max(15, score));
+      const ring = document.getElementById('eval-score-ring');
+      const circumference = 314;
+      ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
+      ring.style.stroke = score >= 75 ? '#25F91C' : (score >= 50 ? '#FACC15' : '#E11D8F');
+
+      document.getElementById('eval-score-num').textContent = score;
+      document.getElementById('eval-score-verdict').textContent =
+        score >= 80 ? 'Sangat Stabil & Terkendali' : (score >= 55 ? 'Cukup Aman, Waspadai Jajan' : 'Perlu Rem Pengeluaran Segera');
+      document.getElementById('eval-score-verdict').className =
+        `font-display font-bold text-sm mt-3 ${score >= 75 ? 'text-neon' : (score >= 50 ? 'text-amber-400' : 'text-magenta')}`;
+
+      document.getElementById('eval-good-list').innerHTML = goodMessages.map(m => `
+        <div class="p-3.5 rounded-2xl bg-void border border-neon/30 text-slate-200 leading-relaxed flex items-start gap-2.5">
+          <span class="text-neon font-bold mt-0.5">●</span>
+          <span>${m}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('eval-bad-list').innerHTML = badMessages.map(m => `
+        <div class="p-3.5 rounded-2xl bg-void border border-magenta/40 text-slate-200 leading-relaxed flex items-start gap-2.5">
+          <span class="text-magenta font-bold mt-0.5">▲</span>
+          <span>${m}</span>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // NAVIGASI TAB & RENDER UTAMA
+    // =========================================================================
+    function switchTab(tabName) {
+      const tabs = ['berdua', 'dompetku', 'evaluasi', 'teman', 'atur'];
+      tabs.forEach(v => {
+        document.getElementById('view-' + v).classList.toggle('hidden', v !== tabName);
+
+        // Mobile Nav
+        const mNav = document.getElementById('nav-' + v);
+        if (mNav) {
+          mNav.className = v === tabName
+            ? 'nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-neon tactile-btn'
+            : 'nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn';
+        }
+
+        // Desktop Sidebar Nav
+        const dNav = document.getElementById('dnav-' + v);
+        if (dNav) {
+          dNav.className = v === tabName
+            ? 'w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-neon/15 border border-neon/40 text-neon text-xs font-bold tactile-btn'
+            : 'w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-400 hover:bg-surfaceLight hover:text-white text-xs font-bold tactile-btn';
+        }
+      });
+
+      if (tabName === 'atur') renderEnvelopeEditor();
+      if (tabName === 'evaluasi') renderEvaluationDashboard();
+    }
+
+    function getStatusColor(pctRemaining) {
+      if (pctRemaining > 50) return { bar: 'bg-neon', text: 'text-neon' };
+      if (pctRemaining >= 20) return { bar: 'bg-amber-400', text: 'text-amber-400' };
+      return { bar: 'bg-magenta', text: 'text-magenta' };
+    }
+
+    function renderEnvelopeBars(envelopes, showNominal, isOwnData) {
+      return envelopes.map(env => {
+        const sisa = Math.max(0, env.allocated - env.spent);
+        const pctLeft = env.allocated > 0 ? Math.round((sisa / env.allocated) * 100) : 100;
+        const colors = getStatusColor(pctLeft);
+        const rightLabel = showNominal
+          ? `${formatRp(sisa, !isOwnData)} (${pctLeft}%)`
+          : `Sisa ${pctLeft}%`;
+
+        return `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-bold text-slate-200">${env.name} <span class="text-[10px] text-slate-500">(${env.pct}%)</span></span>
+              <span class="font-num font-bold ${colors.text}">${rightLabel}</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-void overflow-hidden border border-borderDiametric/70">
+              <div class="h-full ${colors.bar} rounded-full transition-all duration-500" style="width: ${Math.min(100, Math.max(0, pctLeft))}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderScreens() {
+      ['auth', 'verify', 'pairing', 'welcome', 'app'].forEach(s => {
+        document.getElementById('screen-' + s).classList.toggle('hidden', state.step !== s);
+      });
+
+      if (state.step === 'verify') {
+        document.getElementById('verify-email-display').textContent = state.user.email;
+      } else if (state.step === 'pairing') {
+        document.getElementById('my-pairing-code').textContent = state.user.myCode;
+      } else if (state.step === 'welcome') {
+        document.getElementById('welcome-user-subtitle').textContent =
+          `Halo ${state.user.name || 'Kawan'} & ${state.partner.name} • Jaga ritme, kawal masa depan`;
+        renderWisdomCard();
+      } else if (state.step === 'app') {
+        renderApp();
+      }
+    }
+
+    function renderApp() {
+      // Cek Peringatan Akhir Bulan (Tanggal 25 ke atas atau mode simulasi)
+      const now = new Date();
+      const isEndOfMonth = now.getDate() >= 25 || state.forceEomBanner;
+      const eomBanner = document.getElementById('eom-banner');
+      eomBanner.classList.toggle('hidden', !isEndOfMonth);
+      document.getElementById('eom-month-label').textContent =
+        now.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+
+      // Header & Sidebar Info
+      document.getElementById('header-greeting').textContent = `${state.user.name} & ${state.partner.name}`;
+      document.getElementById('header-streak').textContent = `🔥 ${state.user.streak} Hari`;
+      document.getElementById('sidebar-streak').textContent = `🔥 ${state.user.streak} Hari Konsisten`;
+      document.getElementById('sidebar-mask-label').textContent = state.maskScreen
+        ? '🙈 Sensor Layar: Aktif'
+        : '👁️ Sensor Layar: Nonaktif';
+
+      const maskBtn = document.getElementById('btn-mask-screen');
+      maskBtn.innerHTML = state.maskScreen
+        ? `<svg class="w-4 h-4 text-neon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>`
+        : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
+
+      // Periode Anggaran Aktif
+      const pStart = state.user.period?.startDate;
+      const pEnd = state.user.period?.endDate;
+      const pDays = getDaysBetween(pStart, pEnd);
+      const totalPool = getActiveBudgetPool();
+      const dailySafe = totalPool > 0 ? Math.round(totalPool / pDays) : 0;
+
+      document.getElementById('donut-period-tag').textContent = `${pDays} Hari`;
+      document.getElementById('period-summary-title').textContent = totalPool > 0
+        ? `${formatRp(totalPool)} untuk ${pDays} Hari`
+        : `Durasi Target: ${pDays} Hari`;
+      document.getElementById('period-date-range').textContent = `${formatShortDateID(pStart)} — ${formatShortDateID(pEnd)}`;
+      document.getElementById('period-daily-limit').textContent = `${formatRp(dailySafe)} / hari`;
+
+      // Render Visual Charts & Evaluasi
+      renderVisualCharts();
+      renderEvaluationDashboard();
+
+      // Tab 1: Berdua
+      document.getElementById('dash-my-name').textContent = `Amplop ${state.user.name}`;
+      document.getElementById('dash-partner-name').textContent = `Amplop ${state.partner.name}`;
+      document.getElementById('dash-partner-privacy-badge').textContent = state.partner.shareNominal ? 'Mode Terbuka (Rp)' : 'Mode Privasi (%)';
+
+      const totalAlloc = state.user.envelopes.reduce((s, e) => s + e.allocated, 0);
+      const totalSpent = state.user.envelopes.reduce((s, e) => s + e.spent, 0);
+      const totalPctLeft = totalAlloc > 0 ? Math.max(0, Math.round(((totalAlloc - totalSpent) / totalAlloc) * 100)) : 100;
+      document.getElementById('dash-my-total-pct').textContent = `Sisa ${totalPctLeft}%`;
+
+      document.getElementById('dash-my-envelopes').innerHTML = renderEnvelopeBars(state.user.envelopes, true, true);
+      document.getElementById('dash-partner-envelopes').innerHTML = renderEnvelopeBars(state.partner.envelopes, state.partner.shareNominal, false);
+
+      document.getElementById('shared-feed-list').innerHTML = state.feed.slice(0, 6).map(item => `
+        <div class="p-3 rounded-2xl bg-void border border-borderDiametric/70 flex items-start justify-between gap-2">
+          <span>${item.text}</span>
+          <span class="text-[10px] text-slate-500 shrink-0">${item.time}</span>
+        </div>
+      `).join('');
+
+      // Tab 2: Dompetku
+      document.getElementById('wallet-qris-bal').textContent = formatRp(state.user.wallets.qris);
+      document.getElementById('wallet-cash-bal').textContent = formatRp(state.user.wallets.cash);
+
+      document.getElementById('my-detailed-envelopes').innerHTML = state.user.envelopes.map(env => {
+        const sisa = Math.max(0, env.allocated - env.spent);
+        const pctLeft = env.allocated > 0 ? Math.max(0, Math.round((sisa / env.allocated) * 100)) : 100;
+        const colors = getStatusColor(pctLeft);
+        const envDaily = env.allocated > 0 ? Math.round(env.allocated / pDays) : 0;
+        return `
+          <div class="p-3.5 rounded-2xl bg-void border border-borderDiametric/80">
+            <div class="flex items-center justify-between mb-1">
+              <div>
+                <span class="text-xs font-bold text-white">${env.name}</span>
+                <span class="ml-1.5 px-2 py-0.5 rounded-full bg-surfaceLight text-[10px] font-bold text-neon">${env.pct}%</span>
+              </div>
+              <span class="font-num text-xs font-extrabold ${colors.text}">${formatRp(sisa)}</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] text-slate-400 mb-2">
+              <span>Batas aman: ${formatRp(envDaily)}/hari</span>
+              <span>Terpakai: ${formatRp(env.spent)} / ${formatRp(env.allocated)}</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-surface overflow-hidden">
+              <div class="h-full ${colors.bar} rounded-full transition-all duration-500" style="width: ${pctLeft}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const txList = document.getElementById('my-tx-list');
+      txList.innerHTML = state.user.transactions.length === 0
+        ? `<p class="text-xs text-slate-500 text-center py-6">Belum ada transaksi. Tekan tombol <span class="text-neon font-bold">+ Catat Transaksi</span> untuk memasukkan uang saku pertamamu.</p>`
+        : state.user.transactions.slice(0, 20).map(t => {
+            const isIn = t.type === 'IN';
+            const isTrf = t.type === 'TRANSFER';
+            const sign = isIn ? '+' : (isTrf ? '⇄' : '-');
+            const colorCls = isIn ? 'text-neon' : (isTrf ? 'text-amber-400' : 'text-magenta');
+            return `
+              <div class="p-3 rounded-2xl bg-void border border-borderDiametric/60 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-white truncate">${t.note}</p>
+                  <p class="text-[10px] text-slate-400 mt-0.5">${t.envelopeName} • <span class="uppercase font-bold">${t.wallet}</span> • ${t.date}</p>
+                </div>
+                <span class="font-num text-xs font-extrabold ${colorCls} shrink-0">${sign} ${formatRp(t.amount)}</span>
+              </div>
+            `;
+          }).join('');
+
+      // Tab 4: Teman
+      document.getElementById('partner-page-name').textContent = state.partner.name;
+      document.getElementById('partner-code-label').textContent = state.partner.code;
+      document.getElementById('partner-streak-badge').textContent = `🔥 ${state.partner.streak} Hari`;
+      document.getElementById('btn-demo-partner-privacy').textContent = state.partner.shareNominal
+        ? 'Mode Terbuka (Lihat Rp)'
+        : 'Privasi Aktif (Hanya %)';
+      document.getElementById('partner-detailed-envelopes').innerHTML = renderEnvelopeBars(state.partner.envelopes, state.partner.shareNominal, false);
+
+      // Tab 5: Pengaturan
+      document.getElementById('settings-my-code').textContent = state.user.myCode || '------';
+      document.getElementById('settings-partner-info').textContent = `${state.partner.name} (${state.partner.code || '------'})`;
+
+      const shareDesc = document.getElementById('privacy-share-desc');
+      const shareBtn = document.getElementById('toggle-share-btn');
+      const shareDot = document.getElementById('toggle-share-dot');
+
+      if (state.user.shareNominal) {
+        shareDesc.innerHTML = 'Saat ini: <strong class="text-neon">Mode Terbuka</strong> (Teman dapat melihat nominal asli amplopmu).';
+        shareBtn.className = 'w-14 h-8 rounded-full bg-neon/20 border border-neon p-1 transition flex items-center shrink-0 tactile-btn';
+        shareDot.className = 'w-6 h-6 rounded-full bg-neon translate-x-6 transition-transform';
+      } else {
+        shareDesc.innerHTML = 'Saat ini: <strong class="text-pink-300">Mode Privasi</strong> (Teman hanya melihat persentase sisa amplopmu).';
+        shareBtn.className = 'w-14 h-8 rounded-full bg-void border border-borderDiametric p-1 transition flex items-center shrink-0 tactile-btn';
+        shareDot.className = 'w-6 h-6 rounded-full bg-slate-400 translate-x-0 transition-transform';
+      }
+    }
+
+    // Daftarkan seluruh handler ke window agar dapat diakses atribut HTML
+    Object.assign(window, {
+      switchAuthMode,
+      handleAuthSubmit,
+      checkEmailVerification,
+      resendVerificationEmail,
+      copyMyCode,
+      submitPartnerCode,
+      simulateFullPairing,
+      logoutUser,
+      filterWisdom,
+      nextWisdomQuote,
+      openWisdomScreen,
+      enterMainApp,
+      switchTab,
+      openTxModal,
+      closeTxModal,
+      applyDurationPreset,
+      setTxType,
+      setTxWallet,
+      selectTxEnvelope,
+      submitTransaction,
+      openPeriodModal,
+      closePeriodModal,
+      setModalPeriodPreset,
+      savePeriodSettings,
+      openReconcileModal,
+      closeReconcileModal,
+      saveReconcile,
+      toggleScreenMask,
+      toggleShareNominal,
+      toggleDemoPartnerPrivacy,
+      toggleEndOfMonthPreview,
+      sendNudgeToPartner,
+      sendCustomNudge,
+      updateDraftName,
+      updateDraftPct,
+      addNewEnvelopeRow,
+      removeDraftEnvelope,
+      saveEnvelopeConfig,
+      exportToExcel
+    });
+
+    if (!USE_FIREBASE) {
+      loadLocalState();
+      renderScreens();
+    }
+  </script>
+</body>
+</html>
