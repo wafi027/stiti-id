@@ -8,10 +8,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Stiti.id — Kawal Stabilitas 4 Amplop Berdua</title>
 
-  <!-- Favicon SVG Huruf S Tunggal Tanpa Latar Belakang (Ungu Magenta & Hijau Neon) -->
+  <!-- Favicon SVG Huruf S Tunggal Tanpa Latar Belakang -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23E11D8F'/%3E%3Cstop offset='100%25' stop-color='%239333EA'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2325F91C'/%3E%3Cstop offset='100%25' stop-color='%2316A34A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M46 14H24C17.37 14 12 19.37 12 26C12 31.5 15.8 36 21 37.5L36 41.5' fill='none' stroke='url(%23g1)' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M18 50H40C46.63 50 52 44.63 52 38C52 32.5 48.2 28 43 26.5L28 22.5' fill='none' stroke='url(%23g2)' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" />
 
-  <!-- Google Fonts: Bricolage Grotesque (Unik & Ekspresif) + Plus Jakarta Sans + JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- SheetJS CDN untuk Export Laporan Excel (.xlsx) -->
+  <!-- SheetJS CDN untuk Export Excel -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
   <script>
@@ -66,7 +66,6 @@
       font-family: 'JetBrains Mono', monospace;
       font-variant-numeric: tabular-nums;
     }
-    /* Efek Gradien Diametral ala FSTVLST Paradoks Diametral */
     .diametric-card {
       background: linear-gradient(145deg, rgba(21, 11, 36, 0.95) 0%, rgba(33, 18, 56, 0.85) 100%);
       border: 1px solid rgba(168, 85, 247, 0.28);
@@ -119,7 +118,6 @@
     .tactile-btn:active {
       transform: scale(0.95);
     }
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #0A0412; }
     ::-webkit-scrollbar-thumb { background: #381E5C; border-radius: 999px; }
@@ -127,7 +125,6 @@
 </head>
 <body class="min-h-screen bg-void text-slate-100 selection:bg-neon selection:text-void">
 
-  <!-- DEKORASI AMBIENT DIAMETRAL (UNGU MAGENTA & HIJAU NEON) -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
     <div class="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-magenta/15 blur-[110px]"></div>
     <div class="absolute top-1/3 -right-32 w-80 h-80 rounded-full bg-neon/10 blur-[120px]"></div>
@@ -135,23 +132,20 @@
   </div>
 
   <!-- TOAST NOTIFIKASI -->
-  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden max-w-[92%] w-max px-5 py-3 rounded-full bg-surfaceLight/95 backdrop-blur-md border border-neon text-xs font-bold text-white shadow-2xl transition-all">
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden max-w-[92%] w-max px-5 py-3 rounded-full bg-surfaceLight/95 backdrop-blur-md border border-neon text-xs font-bold text-white shadow-2xl transition-all text-center">
     <span id="toast-msg">Notifikasi</span>
   </div>
 
-  <!-- CONTAINER UTAMA ADAPTIF (HP & LAPTOP) -->
   <div id="app-root" class="relative z-10 min-h-screen flex flex-col">
 
     <!-- ===================================================================== -->
-    <!-- GERBANG 1: HALAMAN DAFTAR & LOGIN (RESPONSIF HP & LAPTOP)             -->
+    <!-- GERBANG 1: HALAMAN DAFTAR & LOGIN LANGSUNG                            -->
     <!-- ===================================================================== -->
     <section id="screen-auth" class="flex-1 flex items-center justify-center p-5 md:p-10">
       <div class="w-full max-w-md md:max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
 
-        <!-- Kolom Kiri (Brand & Visual Diametral) -->
         <div class="md:col-span-6 p-4 md:p-6">
           <div class="flex items-center gap-4 mb-5">
-            <!-- LOGO HURUF S SAJA TANPA LATAR BELAKANG (HIJAU & UNGU MAGENTA) -->
             <svg class="w-14 h-14 shrink-0 drop-shadow-[0_0_16px_rgba(225,29,143,0.45)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="logoPurpleAuth" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
@@ -192,7 +186,6 @@
           </div>
         </div>
 
-        <!-- Kolom Kanan (Form Daftar / Login) -->
         <div class="md:col-span-6 diametric-card rounded-3xl p-6 md:p-8">
           <div class="grid grid-cols-2 gap-1.5 p-1.5 bg-void/90 rounded-2xl border border-borderDiametric mb-6">
             <button id="tab-btn-register" onclick="switchAuthMode('register')" class="py-2.5 text-xs font-bold rounded-xl btn-neon-pill">
@@ -220,56 +213,20 @@
             </div>
 
             <button id="auth-submit-btn" type="submit" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-bold text-sm tracking-wide mt-2">
-              Daftar & Kirim Verifikasi Email
+              Daftar & Buat Kode Rahasia
             </button>
           </form>
 
           <div class="mt-5 flex items-center justify-center gap-2 text-[11px] text-slate-400">
-            <span id="firebase-status-dot" class="w-2 h-2 rounded-full bg-magenta animate-pulse"></span>
-            <span id="firebase-status-label">Mode Lokal Siap Pakai (Bisa Disambung Firebase)</span>
+            <span id="firebase-status-dot" class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
+            <span id="firebase-status-label">Terhubung ke Cloud Firebase Live Sync</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===================================================================== -->
-    <!-- GERBANG 2: HALAMAN VERIFIKASI EMAIL                                   -->
-    <!-- ===================================================================== -->
-    <section id="screen-verify" class="hidden flex-1 flex items-center justify-center p-6">
-      <div class="w-full max-w-md diametric-card rounded-3xl p-7 text-center">
-        <div class="w-16 h-16 rounded-full bg-magenta/15 border border-magenta/50 flex items-center justify-center mx-auto mb-5 text-magenta">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-        </div>
-
-        <h2 class="font-display text-2xl font-bold text-white">Cek Kotak Masuk Emailmu</h2>
-        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
-          Tautan verifikasi sudah dikirim ke <span id="verify-email-display" class="text-neon font-bold">email@kamu.com</span>. Klik tautan tersebut sebelum mendapatkan kode rahasia Stiti.id.
-        </p>
-
-        <div class="mt-7 space-y-3">
-          <button onclick="checkEmailVerification(false)" class="w-full py-3.5 rounded-2xl btn-neon-pill font-display font-bold text-sm">
-            Saya Sudah Klik Tautan Verifikasi
-          </button>
-
-          <button onclick="resendVerificationEmail()" id="btn-resend-verify" class="hidden w-full py-3 rounded-2xl bg-void border border-borderDiametric text-xs font-bold text-slate-300 hover:border-magenta">
-            Kirim Ulang Email Verifikasi
-          </button>
-
-          <button onclick="checkEmailVerification(true)" id="btn-demo-verify" class="w-full py-3 rounded-2xl bg-surfaceLight border border-magenta/40 hover:border-neon text-xs font-bold text-slate-200 tactile-btn">
-            [Mode Tes Lokal] Lewati Verifikasi Email
-          </button>
-        </div>
-
-        <button onclick="logoutUser()" class="text-xs text-slate-500 hover:text-slate-300 mt-6">
-          Ganti Email / Keluar
-        </button>
-      </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- GERBANG 3: CROSS-PAIRING KODE RAHASIA 2 ARAH                          -->
+    <!-- GERBANG 2: CROSS-PAIRING KODE RAHASIA 2 ARAH                          -->
     <!-- ===================================================================== -->
     <section id="screen-pairing" class="hidden flex-1 flex items-center justify-center p-6">
       <div class="w-full max-w-md diametric-card rounded-3xl p-6 md:p-8">
@@ -305,7 +262,7 @@
             Hubungkan & Lanjut
           </button>
 
-          <button onclick="simulateFullPairing()" id="btn-demo-pair" class="w-full py-2.5 rounded-xl bg-surfaceLight border border-magenta/40 hover:border-neon text-[11px] font-bold text-slate-200 tactile-btn">
+          <button onclick="simulateFullPairing()" id="btn-demo-pair" class="hidden w-full py-2.5 rounded-xl bg-surfaceLight border border-magenta/40 hover:border-neon text-[11px] font-bold text-slate-200 tactile-btn">
             [Mode Tes Lokal] Simulasikan Teman Sudah Tukar Kode
           </button>
         </div>
@@ -317,12 +274,11 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- GERBANG 4: HALAMAN PEMBUKA SETELAH LOGIN (LOGO S & WISDOM REMINDER)   -->
+    <!-- GERBANG 3: HALAMAN PEMBUKA SETELAH LOGIN (LOGO S & WISDOM REMINDER)   -->
     <!-- ===================================================================== -->
     <section id="screen-welcome" class="hidden flex-1 flex items-center justify-center p-5 md:p-10">
       <div class="w-full max-w-xl text-center space-y-6">
 
-        <!-- LOGO HURUF S TUNGGAL TANPA LATAR BELAKANG + BRAND STITI.ID -->
         <div class="flex flex-col items-center justify-center">
           <svg class="w-24 h-24 md:w-28 md:h-28 drop-shadow-[0_0_28px_rgba(37,249,28,0.3)] mb-3" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -347,7 +303,6 @@
           </p>
         </div>
 
-        <!-- FILTER KATEGORI REMINDER -->
         <div class="flex flex-wrap items-center justify-center gap-2">
           <button onclick="filterWisdom('all')" id="wcat-all" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-neon text-void tactile-btn">Semua</button>
           <button onclick="filterWisdom('ulama')" id="wcat-ulama" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn">Ulama</button>
@@ -355,7 +310,6 @@
           <button onclick="filterWisdom('influencer')" id="wcat-influencer" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-surface border border-borderDiametric text-slate-300 hover:border-magenta tactile-btn">Edukator & Falsafah</button>
         </div>
 
-        <!-- KARTU PENGINGAT & MOTIVASI FINANSIAL -->
         <div class="diametric-border-glow rounded-3xl p-6 md:p-8 text-left relative overflow-hidden">
           <div class="flex items-center justify-between mb-3">
             <span id="wisdom-badge" class="px-3 py-1 rounded-full bg-magenta/20 border border-magenta/40 text-[11px] font-bold text-pink-300">
@@ -379,7 +333,6 @@
           </div>
         </div>
 
-        <!-- TOMBOL MASUK KE HALAMAN UTAMA -->
         <div class="pt-2">
           <button onclick="enterMainApp()" class="w-full md:w-auto md:px-10 py-4 rounded-full btn-neon-pill font-display font-extrabold text-sm md:text-base tracking-wide">
             Masuk ke Dashboard Stiti.id →
@@ -394,10 +347,8 @@
     <!-- ===================================================================== -->
     <div id="screen-app" class="hidden flex-1 flex flex-col md:flex-row">
 
-      <!-- DESKTOP / LAPTOP SIDEBAR NAVIGATION (TERSEMBUNYI DI HP) -->
       <aside class="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col justify-between bg-surface/90 backdrop-blur-xl border-r border-borderDiametric/70 p-5 sticky top-0 h-screen">
         <div>
-          <!-- Brand Header Sidebar -->
           <div class="flex items-center gap-3 mb-7">
             <svg class="w-10 h-10 shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -419,12 +370,10 @@
             </div>
           </div>
 
-          <!-- Tombol Utama Catat Transaksi di Laptop -->
           <button onclick="openTxModal()" class="w-full py-3.5 px-4 rounded-2xl btn-neon-pill font-display font-extrabold text-sm flex items-center justify-center gap-2 mb-6">
             <span class="text-lg leading-none">+</span> Catat Transaksi
           </button>
 
-          <!-- Menu Navigasi Laptop -->
           <nav class="space-y-1.5">
             <button onclick="switchTab('berdua')" id="dnav-berdua" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-neon/15 border border-neon/40 text-neon text-xs font-bold tactile-btn">
               <span>📊</span> Dashboard Berdua
@@ -444,7 +393,6 @@
           </nav>
         </div>
 
-        <!-- Bagian Bawah Sidebar Laptop -->
         <div class="space-y-2.5 pt-4 border-t border-borderDiametric/60">
           <button onclick="openWisdomScreen()" class="w-full py-2.5 px-3 rounded-xl bg-void border border-magenta/40 hover:border-neon text-xs font-bold text-pink-300 flex items-center justify-center gap-2 tactile-btn">
             <span>✨</span> Kutipan Penyemangat
@@ -455,13 +403,10 @@
         </div>
       </aside>
 
-      <!-- KOLOM KONTEN UTAMA (RESPONSIF HP & LAPTOP) -->
       <div class="flex-1 flex flex-col min-w-0 pb-24 md:pb-10">
 
-        <!-- MOBILE TOP HEADER (TERSEMBUNYI DI LAPTOP) -->
         <header class="md:hidden sticky top-0 z-30 bg-void/90 backdrop-blur-xl border-b border-borderDiametric/70 px-4 py-3 flex items-center justify-between">
           <div class="flex items-center gap-2.5">
-            <!-- Logo Huruf S Tunggal Tanpa Latar Belakang -->
             <svg class="w-8 h-8 shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="logoPurpleMob" x1="10" y1="10" x2="46" y2="38" gradientUnits="userSpaceOnUse">
@@ -496,10 +441,9 @@
           </div>
         </header>
 
-        <!-- CONTAINER DALAM LAPTOP AGAR LEGA & PROPORSIONAL -->
         <div class="w-full max-w-6xl mx-auto p-4 md:p-7 space-y-5">
 
-          <!-- BANNER PERINGATAN REKAP AKHIR BULAN & EKSPOR EXCEL -->
+          <!-- BANNER PERINGATAN REKAP AKHIR BULAN -->
           <div id="eom-banner" class="hidden rounded-3xl p-4 md:p-5 bg-gradient-to-r from-magenta/25 via-surfaceLight to-neon/20 border border-magenta/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div class="flex items-start gap-3">
               <span class="text-2xl mt-0.5">📅</span>
@@ -518,12 +462,8 @@
             </button>
           </div>
 
-          <!-- =============================================================== -->
-          <!-- TAB 1: DASHBOARD UTAMA BERDUA                                   -->
-          <!-- =============================================================== -->
+          <!-- TAB 1: DASHBOARD BERDUA -->
           <main id="view-berdua" class="space-y-5">
-
-            <!-- Header Ringkasan & Aksi Cepat -->
             <div class="diametric-card rounded-3xl p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <span class="px-3 py-1 rounded-full bg-neon/15 border border-neon/40 text-[10px] font-extrabold text-neon uppercase tracking-wider">
@@ -547,10 +487,7 @@
               </div>
             </div>
 
-            <!-- GRID GRAFIK VISUAL (DONUT DISTRIBUSI + GRAFIK BATANG PERBANDINGAN) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-
-              <!-- Grafik Donut Distribusi 4 Amplopku -->
               <div class="lg:col-span-5 diametric-card rounded-3xl p-5 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-3">
                   <h3 class="font-display font-bold text-base text-white">Komposisi Amplopku</h3>
@@ -558,21 +495,16 @@
                 </div>
 
                 <div class="flex items-center justify-center my-2 relative">
-                  <svg id="my-donut-svg" class="w-48 h-48 -rotate-90" viewBox="0 0 160 160">
-                    <!-- Segmen diisi dinamis via JS -->
-                  </svg>
+                  <svg id="my-donut-svg" class="w-48 h-48 -rotate-90" viewBox="0 0 160 160"></svg>
                   <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
                     <span class="text-[10px] font-bold uppercase text-slate-400">Total Sisa</span>
                     <span id="donut-center-val" class="font-num text-sm font-extrabold text-neon mt-0.5">Rp 0</span>
                   </div>
                 </div>
 
-                <div id="donut-legend" class="grid grid-cols-2 gap-2 mt-3 text-[11px]">
-                  <!-- Legend diisi JS -->
-                </div>
+                <div id="donut-legend" class="grid grid-cols-2 gap-2 mt-3 text-[11px]"></div>
               </div>
 
-              <!-- Grafik Perbandingan Sisa Amplop: Kamu vs Teman -->
               <div class="lg:col-span-7 diametric-card rounded-3xl p-5 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-3">
                   <div>
@@ -585,13 +517,10 @@
                   </div>
                 </div>
 
-                <div id="comparison-bar-chart" class="space-y-4 my-auto py-2">
-                  <!-- Bar chart ganda diisi JS -->
-                </div>
+                <div id="comparison-bar-chart" class="space-y-4 my-auto py-2"></div>
               </div>
             </div>
 
-            <!-- DETAIL PROGRESS AMPLOPKU & AMPLOP TEMAN BERDAMPINGAN DI LAPTOP -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div class="diametric-card rounded-3xl p-5">
                 <div class="flex items-center justify-between mb-4">
@@ -618,22 +547,15 @@
               </div>
             </div>
 
-            <!-- Log Aktivitas & Colekan Terakhir -->
             <div class="diametric-card rounded-3xl p-5">
               <h3 class="font-display font-bold text-base text-white mb-3">Aktivitas & Pengingat Terkini</h3>
               <div id="shared-feed-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-slate-200"></div>
             </div>
           </main>
 
-          <!-- =============================================================== -->
-          <!-- TAB 2: DASHBOARD DOMPETKU & PERIODE ANGGARAN                    -->
-          <!-- =============================================================== -->
+          <!-- TAB 2: DOMPETKU & PERIODE -->
           <main id="view-dompetku" class="hidden space-y-5">
-
-            <!-- BARIS ATAS: 2 KARTU SALDO + KARTU PERIODE TANGGAL & JATAH HARIAN -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-
-              <!-- Rekening QRIS & Dompet Cash -->
               <div class="lg:col-span-6 grid grid-cols-2 gap-3.5">
                 <div class="diametric-card rounded-3xl p-4 flex flex-col justify-between">
                   <div class="flex items-center justify-between mb-2">
@@ -658,7 +580,6 @@
                 </div>
               </div>
 
-              <!-- KARTU PERIODE UANG SAKU & BATAS AMAN HARIAN -->
               <div class="lg:col-span-6 diametric-border-glow rounded-3xl p-4 md:p-5 flex flex-col justify-between">
                 <div class="flex items-center justify-between gap-2 mb-2">
                   <div>
@@ -685,9 +606,7 @@
               </div>
             </div>
 
-            <!-- BARIS BAWAH: AMPLOP AKTIF & RIWAYAT TRANSAKSI -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              <!-- Daftar Amplop Pribadi -->
               <div class="lg:col-span-6 diametric-card rounded-3xl p-5">
                 <div class="flex items-center justify-between mb-4">
                   <div>
@@ -701,7 +620,6 @@
                 <div id="my-detailed-envelopes" class="space-y-3"></div>
               </div>
 
-              <!-- Riwayat Transaksi Pribadi & Rekap Bulanan -->
               <div class="lg:col-span-6 diametric-card rounded-3xl p-5 flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-4">
@@ -719,14 +637,9 @@
             </div>
           </main>
 
-          <!-- =============================================================== -->
-          <!-- TAB 3: DASHBOARD EVALUASI OTOMATIS (BAIK & KURANG)              -->
-          <!-- =============================================================== -->
+          <!-- TAB 3: DASHBOARD EVALUASI -->
           <main id="view-evaluasi" class="hidden space-y-5">
-
-            <!-- Header & Skor Kesehatan Finansial -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              <!-- Kartu Gauge Skor -->
               <div class="lg:col-span-4 diametric-card rounded-3xl p-6 flex flex-col items-center justify-center text-center">
                 <span class="px-3 py-1 rounded-full bg-magenta/20 text-pink-300 text-[10px] font-extrabold uppercase tracking-wider mb-3">
                   Indeks Kesehatan Stiti.id
@@ -744,7 +657,6 @@
                 <p id="eval-score-verdict" class="font-display font-bold text-sm text-neon mt-3">Ritme Keuangan Stabil</p>
               </div>
 
-              <!-- Ringkasan Evaluasi Angka & Rekap Akhir Bulan -->
               <div class="lg:col-span-8 diametric-card rounded-3xl p-6 flex flex-col justify-between">
                 <div>
                   <h2 class="font-display text-xl font-extrabold text-white">Evaluasi Otomatis & Peringatan Dini</h2>
@@ -777,9 +689,7 @@
               </div>
             </div>
 
-            <!-- DUA KOLOM OTOMATIS: HAL BAIK (APRESIASI) VS HAL KURANG (PERINGATAN) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <!-- Kolom Hal Baik -->
               <div class="diametric-card rounded-3xl p-5 border-neon/40">
                 <div class="flex items-center gap-2.5 mb-4">
                   <span class="w-8 h-8 rounded-full bg-neon/20 text-neon flex items-center justify-center font-bold">✓</span>
@@ -788,12 +698,9 @@
                     <p class="text-[11px] text-slate-400">Kebiasaan sehat yang sudah berjalan</p>
                   </div>
                 </div>
-                <div id="eval-good-list" class="space-y-3 text-xs">
-                  <!-- Diisi dinamis oleh JS -->
-                </div>
+                <div id="eval-good-list" class="space-y-3 text-xs"></div>
               </div>
 
-              <!-- Kolom Hal Kurang / Peringatan -->
               <div class="diametric-card rounded-3xl p-5 border-magenta/40">
                 <div class="flex items-center gap-2.5 mb-4">
                   <span class="w-8 h-8 rounded-full bg-magenta/20 text-magenta flex items-center justify-center font-bold">!</span>
@@ -802,16 +709,12 @@
                     <p class="text-[11px] text-slate-400">Pos yang perlu segera direm atau diperbaiki</p>
                   </div>
                 </div>
-                <div id="eval-bad-list" class="space-y-3 text-xs">
-                  <!-- Diisi dinamis oleh JS -->
-                </div>
+                <div id="eval-bad-list" class="space-y-3 text-xs"></div>
               </div>
             </div>
           </main>
 
-          <!-- =============================================================== -->
-          <!-- TAB 4: DASHBOARD DOMPET TEMAN                                   -->
-          <!-- =============================================================== -->
+          <!-- TAB 4: PANTAU TEMAN -->
           <main id="view-teman" class="hidden space-y-5">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
               <div class="lg:col-span-5 diametric-card rounded-3xl p-5 space-y-4">
@@ -825,15 +728,13 @@
                   </span>
                 </div>
 
-                <!-- Simulasi Toggle Privasi Teman (Mode Lokal) -->
-                <div id="demo-partner-privacy-wrap" class="p-3.5 rounded-2xl bg-void border border-borderDiametric flex items-center justify-between gap-2">
+                <div id="demo-partner-privacy-wrap" class="hidden p-3.5 rounded-2xl bg-void border border-borderDiametric flex items-center justify-between gap-2">
                   <span class="text-[11px] text-slate-400">Simulasi Mode Privasi Teman:</span>
                   <button onclick="toggleDemoPartnerPrivacy()" id="btn-demo-partner-privacy" class="px-3 py-1.5 rounded-full bg-surfaceLight text-[11px] font-bold text-neon border border-neon/40 tactile-btn">
                     Privasi Aktif (Hanya %)
                   </button>
                 </div>
 
-                <!-- Kirim Pesan Motivasi / Pengingat -->
                 <div class="space-y-2.5 pt-2">
                   <label class="block text-xs font-bold text-white">Kirim Catatan Semangat / Pengingat</label>
                   <div class="flex gap-2">
@@ -852,13 +753,9 @@
             </div>
           </main>
 
-          <!-- =============================================================== -->
-          <!-- TAB 5: PENGATURAN AMPLOP OTOMATIS & PRIVASI                     -->
-          <!-- =============================================================== -->
+          <!-- TAB 5: PENGATURAN PORSI & PRIVASI -->
           <main id="view-atur" class="hidden space-y-5">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-
-              <!-- Kolom Kiri: Sakelar Privasi & Info Akun -->
               <div class="lg:col-span-5 space-y-4">
                 <div class="diametric-card rounded-3xl p-5">
                   <div class="flex items-center justify-between gap-3">
@@ -890,7 +787,6 @@
                 </div>
               </div>
 
-              <!-- Kolom Kanan: Kustomisasi Porsi Amplop (Otomatis Ubah Nominal Pembagian) -->
               <div class="lg:col-span-7 diametric-card rounded-3xl p-5 space-y-4">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div>
@@ -915,16 +811,13 @@
                   </button>
                 </div>
               </div>
-
             </div>
           </main>
 
         </div>
       </div>
 
-      <!-- =================================================================== -->
-      <!-- MOBILE BOTTOM NAVIGATION BAR (TERSEMBUNYI DI LAPTOP)                 -->
-      <!-- =================================================================== -->
+      <!-- MOBILE BOTTOM NAVIGATION -->
       <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-surface/95 backdrop-blur-xl border-t border-borderDiametric px-1.5 py-2 flex items-center justify-around">
         <button onclick="switchTab('berdua')" id="nav-berdua" class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-neon tactile-btn">
           <span class="text-base">📊</span>
@@ -936,7 +829,6 @@
           <span class="text-[10px] font-bold">Dompetku</span>
         </button>
 
-        <!-- Tombol Tengah Cepat Catat Transaksi -->
         <button onclick="openTxModal()" class="w-12 h-12 -mt-6 rounded-full btn-neon-pill flex items-center justify-center text-xl font-extrabold">
           +
         </button>
@@ -958,9 +850,7 @@
       </nav>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 1: CATAT TRANSAKSI CEPAT + TANGGAL DURASI UANG SAKU             -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 1: CATAT TRANSAKSI -->
     <div id="modal-tx" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-end md:items-center justify-center p-0 md:p-4">
       <div class="w-full max-w-md bg-surface border border-magenta/50 rounded-t-3xl md:rounded-3xl p-5 md:p-6 space-y-4 max-h-[92vh] overflow-y-auto">
         <div class="flex items-center justify-between">
@@ -968,7 +858,6 @@
           <button onclick="closeTxModal()" class="w-8 h-8 rounded-full bg-void text-slate-400 hover:text-white flex items-center justify-center tactile-btn">✕</button>
         </div>
 
-        <!-- Tipe Transaksi -->
         <div class="grid grid-cols-3 gap-1.5 p-1 bg-void rounded-2xl border border-borderDiametric">
           <button type="button" onclick="setTxType('OUT')" id="tx-type-OUT" class="py-2 rounded-xl text-xs font-bold btn-neon-pill">Uang Keluar</button>
           <button type="button" onclick="setTxType('IN')" id="tx-type-IN" class="py-2 rounded-xl text-xs font-bold text-slate-400">Uang Masuk</button>
@@ -993,13 +882,11 @@
             </div>
           </div>
 
-          <!-- Pilihan Amplop (Saat Uang Keluar) -->
           <div id="tx-envelope-wrap">
             <label class="block text-xs font-bold text-slate-300 mb-1.5">Potong Jatah Amplop Mana?</label>
             <div id="tx-envelope-pills" class="grid grid-cols-2 gap-2"></div>
           </div>
 
-          <!-- Pengaturan Tanggal & Durasi Berlaku (Saat Uang Masuk) -->
           <div id="tx-autosplit-info" class="hidden space-y-3 p-3.5 rounded-2xl bg-void border border-magenta/40">
             <div>
               <label class="block text-[11px] font-bold text-pink-300 mb-1.5">Uang Ini Untuk Berapa Lama?</label>
@@ -1038,9 +925,7 @@
       </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 2: ATUR TANGGAL PERIODE UANG SAKU                               -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 2: ATUR TANGGAL PERIODE -->
     <div id="modal-period" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
       <div class="w-full max-w-sm bg-surface border border-neon/50 rounded-3xl p-5 space-y-4">
         <div class="flex items-center justify-between">
@@ -1071,9 +956,7 @@
       </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 3: KOREKSI SALDO CEPAT                                          -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 3: KOREKSI SALDO -->
     <div id="modal-reconcile" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
       <div class="w-full max-w-sm bg-surface border border-magenta/50 rounded-3xl p-5 space-y-4">
         <div class="flex items-center justify-between">
@@ -1092,16 +975,12 @@
 
   </div>
 
-  <!-- ======================================================================= -->
-  <!-- JAVASCRIPT ENGINE: STITI.ID (DUAL-MODE OFFLINE & LIVE FIREBASE v10)     -->
-  <!-- ======================================================================= -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import {
       getAuth,
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
-      sendEmailVerification,
       onAuthStateChanged,
       signOut
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
@@ -1116,8 +995,7 @@
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
     /**
-     * KONFIGURASI FIREBASE STITI.ID
-     * Ubah USE_FIREBASE = true setelah menempelkan firebaseConfig milikmu.
+     * TEMPEL 6 BARIS firebaseConfig MILIKMU DI BAWAH INI
      */
     const USE_FIREBASE = true;
     const firebaseConfig = {
@@ -1140,17 +1018,27 @@
       const fbApp = initializeApp(firebaseConfig);
       auth = getAuth(fbApp);
       db = getFirestore(fbApp);
-      document.getElementById('firebase-status-dot').className = 'w-2 h-2 rounded-full bg-neon animate-pulse';
-      document.getElementById('firebase-status-label').textContent = 'Terhubung ke Cloud Firebase Live Sync';
-      document.getElementById('btn-demo-verify').classList.add('hidden');
-      document.getElementById('btn-resend-verify').classList.remove('hidden');
-      document.getElementById('btn-demo-pair').classList.add('hidden');
-      document.getElementById('demo-partner-privacy-wrap').classList.add('hidden');
     }
 
-    // =========================================================================
-    // BANK KUTIPAN PENGINGAT & MOTIVASI FINANSIAL (ULAMA, AHLI & EDUKATOR)
-    // =========================================================================
+    function translateAuthError(code) {
+      switch (code) {
+        case 'auth/email-already-in-use':
+          return 'Email ini sudah terdaftar! Pindah ke tab "Masuk Akun" di kanan untuk login, atau pakai email lain untuk temanmu.';
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
+        case 'auth/user-not-found':
+          return 'Email atau kata sandi belum cocok. Pastikan kamu sudah mendaftarkan email ini terlebih dahulu.';
+        case 'auth/weak-password':
+          return 'Kata sandi terlalu pendek, gunakan minimal 6 karakter.';
+        case 'auth/invalid-email':
+          return 'Format alamat email tidak valid.';
+        case 'auth/too-many-requests':
+          return 'Terlalu banyak percobaan masuk. Tunggu 1 menit lalu coba lagi.';
+        default:
+          return 'Terjadi kendala koneksi (' + code + '). Coba ulangi beberapa detik lagi.';
+      }
+    }
+
     const WISDOM_QUOTES = [
       {
         cat: 'ulama',
@@ -1258,9 +1146,6 @@
       renderScreens();
     }
 
-    // =========================================================================
-    // DATA BAWAAN MODEL HIBRIDA 4 AMPLOP & STATE APLIKASI
-    // =========================================================================
     const DEFAULT_ENVELOPES = [
       { id: 'env_wajib', name: 'Kebutuhan Wajib', pct: 50, allocated: 0, spent: 0, desc: 'Makan, bensin, kuota' },
       { id: 'env_masadepan', name: 'Masa Depan', pct: 20, allocated: 0, spent: 0, desc: '12% Darurat • 8% Investasi' },
@@ -1283,7 +1168,7 @@
     }
 
     let state = {
-      step: 'auth', // 'auth' | 'verify' | 'pairing' | 'welcome' | 'app'
+      step: 'auth', // 'auth' | 'pairing' | 'welcome' | 'app'
       authMode: 'register',
       maskScreen: false,
       forceEomBanner: false,
@@ -1291,7 +1176,6 @@
         uid: 'local_user',
         name: '',
         email: '',
-        verified: false,
         myCode: '',
         partnerCode: '',
         partnerUid: '',
@@ -1329,31 +1213,11 @@
 
     async function saveUserState() {
       if (!USE_FIREBASE) {
-        localStorage.setItem('stiti_id_v2_state', JSON.stringify(state));
+        localStorage.setItem('stiti_id_v3_state', JSON.stringify(state));
         return;
       }
-      if (auth.currentUser) {
+      if (auth && auth.currentUser) {
         await setDoc(doc(db, 'users', auth.currentUser.uid), state.user, { merge: true });
-      }
-    }
-
-    function loadLocalState() {
-      const saved = localStorage.getItem('stiti_id_v2_state');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          state = {
-            ...state,
-            ...parsed,
-            user: {
-              ...state.user,
-              ...(parsed.user || {}),
-              period: { ...state.user.period, ...((parsed.user && parsed.user.period) || {}) }
-            }
-          };
-        } catch (e) {
-          console.error('Gagal memuat state lokal:', e);
-        }
       }
     }
 
@@ -1368,7 +1232,7 @@
       document.getElementById('toast-msg').textContent = msg;
       toast.classList.remove('hidden');
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
+      window._toastTimer = setTimeout(() => toast.classList.add('hidden'), 4000);
     }
 
     function generateSecretCode() {
@@ -1381,7 +1245,7 @@
     }
 
     // =========================================================================
-    // FIREBASE REAL-TIME AUTH & LISTENER
+    // FIREBASE REAL-TIME AUTH & LISTENER (TANPA HAMBATAN VERIFIKASI)
     // =========================================================================
     if (USE_FIREBASE) {
       onAuthStateChanged(auth, async (fbUser) => {
@@ -1392,44 +1256,52 @@
           return;
         }
 
-        const userRef = doc(db, 'users', fbUser.uid);
-        const snap = await getDoc(userRef);
+        try {
+          const userRef = doc(db, 'users', fbUser.uid);
+          const snap = await getDoc(userRef);
 
-        if (!snap.exists()) {
-          const initialUser = {
-            ...state.user,
-            uid: fbUser.uid,
-            name: fbUser.displayName || fbUser.email.split('@')[0],
-            email: fbUser.email,
-            verified: fbUser.emailVerified,
-            myCode: generateSecretCode()
-          };
-          await setDoc(userRef, initialUser);
-          await setDoc(doc(db, 'codes', initialUser.myCode), {
-            uid: fbUser.uid,
-            name: initialUser.name,
-            targetCode: null,
-            roomId: null
-          });
-          state.user = initialUser;
-        } else {
-          state.user = { ...state.user, ...snap.data(), verified: fbUser.emailVerified };
-        }
+          if (!snap.exists() || !snap.data().myCode) {
+            const existingData = snap.exists() ? snap.data() : {};
+            const myCode = existingData.myCode || generateSecretCode();
+            const displayName = existingData.name || fbUser.displayName || fbUser.email.split('@')[0];
+            const initialUser = {
+              ...state.user,
+              ...existingData,
+              uid: fbUser.uid,
+              name: displayName,
+              email: fbUser.email,
+              myCode
+            };
+            await setDoc(userRef, initialUser, { merge: true });
+            await setDoc(doc(db, 'codes', myCode), {
+              uid: fbUser.uid,
+              name: displayName,
+              targetCode: null,
+              roomId: null
+            }, { merge: true });
+            state.user = initialUser;
+          } else {
+            state.user = {
+              ...state.user,
+              ...snap.data(),
+              period: { ...state.user.period, ...(snap.data().period || {}) }
+            };
+          }
 
-        if (!fbUser.emailVerified) {
-          state.step = 'verify';
-          renderScreens();
-        } else if (!state.user.paired) {
-          state.step = 'pairing';
-          renderScreens();
-          listenCodePairing(state.user.myCode);
-        } else {
-          // Masuk ke Halaman Pembuka Kutipan dulu setelah login
-          currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
-          renderWisdomCard();
-          state.step = 'welcome';
-          renderScreens();
-          startLiveAppListeners();
+          if (!state.user.paired) {
+            state.step = 'pairing';
+            renderScreens();
+            listenCodePairing(state.user.myCode);
+          } else {
+            currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
+            renderWisdomCard();
+            state.step = 'welcome';
+            renderScreens();
+            startLiveAppListeners();
+          }
+        } catch (err) {
+          console.error(err);
+          showToast('Gagal memuat profil: ' + err.message);
         }
       });
     }
@@ -1469,7 +1341,11 @@
 
       unsubUser = onSnapshot(doc(db, 'users', state.user.uid), (snap) => {
         if (snap.exists()) {
-          state.user = { ...state.user, ...snap.data() };
+          state.user = {
+            ...state.user,
+            ...snap.data(),
+            period: { ...state.user.period, ...(snap.data().period || {}) }
+          };
           renderApp();
         }
       });
@@ -1502,7 +1378,7 @@
     }
 
     // =========================================================================
-    // ALUR DAFTAR, VERIFIKASI EMAIL & CROSS-PAIRING 2 ARAH
+    // ALUR DAFTAR, LOGIN & CROSS-PAIRING 2 ARAH
     // =========================================================================
     function switchAuthMode(mode) {
       state.authMode = mode;
@@ -1515,7 +1391,7 @@
         btnReg.className = 'py-2.5 text-xs font-bold rounded-xl btn-neon-pill';
         btnLog.className = 'py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
         nameWrap.classList.remove('hidden');
-        submitBtn.textContent = 'Daftar & Kirim Verifikasi Email';
+        submitBtn.textContent = 'Daftar & Buat Kode Rahasia';
       } else {
         btnLog.className = 'py-2.5 text-xs font-bold rounded-xl btn-neon-pill';
         btnReg.className = 'py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition';
@@ -1529,98 +1405,44 @@
       const name = document.getElementById('auth-name').value.trim() || 'Pengguna';
       const email = document.getElementById('auth-email').value.trim();
       const password = document.getElementById('auth-password').value;
+      const submitBtn = document.getElementById('auth-submit-btn');
+      const oldText = submitBtn.textContent;
 
-      if (USE_FIREBASE) {
-        try {
-          if (state.authMode === 'register') {
-            const cred = await createUserWithEmailAndPassword(auth, email, password);
-            const myCode = generateSecretCode();
-            const newUser = {
-              ...state.user,
-              uid: cred.user.uid,
-              name,
-              email,
-              verified: false,
-              myCode
-            };
-            await setDoc(doc(db, 'users', cred.user.uid), newUser);
-            await setDoc(doc(db, 'codes', myCode), {
-              uid: cred.user.uid,
-              name,
-              targetCode: null,
-              roomId: null
-            });
-            await sendEmailVerification(cred.user);
-            showToast('Email verifikasi dikirim ke ' + email);
-          } else {
-            await signInWithEmailAndPassword(auth, email, password);
-            showToast('Berhasil masuk!');
-          }
-        } catch (err) {
-          showToast('Error: ' + err.message);
-        }
-        return;
-      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Memproses...';
 
-      if (state.authMode === 'register') {
-        state.user.name = name;
-        state.user.email = email;
-        state.user.verified = false;
-        state.user.myCode = generateSecretCode();
-        state.step = 'verify';
-        showToast('Tautan verifikasi dikirim ke ' + email);
-      } else {
-        if (!state.user.email) {
-          state.user.name = email.split('@')[0];
-          state.user.email = email;
-          state.user.myCode = generateSecretCode();
-        }
-        if (state.user.paired) {
-          currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
-          renderWisdomCard();
-          state.step = 'welcome';
-        } else {
-          state.step = state.user.verified ? 'pairing' : 'verify';
-        }
-        showToast('Selamat datang kembali di Stiti.id!');
-      }
-      await saveUserState();
-      renderScreens();
-    }
-
-    async function checkEmailVerification(isDemoBypass) {
-      if (USE_FIREBASE && auth.currentUser) {
-        await auth.currentUser.reload();
-        if (auth.currentUser.emailVerified) {
-          state.user.verified = true;
-          await saveUserState();
+      try {
+        if (state.authMode === 'register') {
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          const myCode = generateSecretCode();
+          const newUser = {
+            ...state.user,
+            uid: cred.user.uid,
+            name,
+            email,
+            myCode
+          };
+          await setDoc(doc(db, 'users', cred.user.uid), newUser);
+          await setDoc(doc(db, 'codes', myCode), {
+            uid: cred.user.uid,
+            name,
+            targetCode: null,
+            roomId: null
+          });
+          state.user = newUser;
           state.step = 'pairing';
           renderScreens();
-          listenCodePairing(state.user.myCode);
-          showToast('Email sah terverifikasi! Sekarang tukar kode dengan temanmu.');
+          listenCodePairing(myCode);
+          showToast('Akun siap! Sekarang tukar kode rahasia dengan temanmu.');
         } else {
-          showToast('Email belum terverifikasi. Cek folder Inbox atau Spam emailmu.');
+          await signInWithEmailAndPassword(auth, email, password);
+          showToast('Berhasil masuk!');
         }
-        return;
-      }
-
-      if (isDemoBypass) {
-        state.user.verified = true;
-        state.step = 'pairing';
-        await saveUserState();
-        renderScreens();
-        showToast('Email terverifikasi! Sekarang tukar kode 2 arah.');
-      }
-    }
-
-    async function resendVerificationEmail() {
-      if (USE_FIREBASE && auth.currentUser) {
-        try {
-          await sendEmailVerification(auth.currentUser);
-          showToast('Email verifikasi baru telah dikirim!');
-        } catch (err) {
-          showToast('Tunggu sebentar sebelum mengirim ulang.');
-        }
+      } catch (err) {
+        showToast(translateAuthError(err.code));
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldText;
       }
     }
 
@@ -1640,79 +1462,57 @@
         return;
       }
 
-      if (USE_FIREBASE) {
-        try {
-          const partnerCodeRef = doc(db, 'codes', inputCode);
-          const partnerSnap = await getDoc(partnerCodeRef);
+      try {
+        const partnerCodeRef = doc(db, 'codes', inputCode);
+        const partnerSnap = await getDoc(partnerCodeRef);
 
-          if (!partnerSnap.exists()) {
-            showToast('Kode teman tidak ditemukan. Cek kembali hurufnya.');
-            return;
-          }
-
-          const partnerData = partnerSnap.data();
-          if (partnerData.roomId && partnerData.targetCode !== state.user.myCode) {
-            showToast('Kode temanmu sudah terkunci dengan akun lain!');
-            return;
-          }
-
-          const myCodeRef = doc(db, 'codes', state.user.myCode);
-          await updateDoc(myCodeRef, { targetCode: inputCode });
-
-          if (partnerData.targetCode === state.user.myCode) {
-            const roomId = [state.user.uid, partnerData.uid].sort().join('_');
-            await setDoc(doc(db, 'rooms', roomId), {
-              members: [state.user.uid, partnerData.uid],
-              locked: true,
-              feed: [{
-                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
-                text: `🔒 ${state.user.name} & ${partnerData.name} resmi terhubung berdua di Stiti.id!`
-              }]
-            }, { merge: true });
-
-            await updateDoc(myCodeRef, { roomId, partnerUid: partnerData.uid });
-            await updateDoc(partnerCodeRef, { roomId, partnerUid: state.user.uid });
-          } else {
-            document.getElementById('partner-ack-text').textContent =
-              `Kode ${partnerData.name} valid! Menunggu ${partnerData.name} memasukkan kodemu (${state.user.myCode})...`;
-            showToast(`Kode ${partnerData.name} cocok! Tunggu temanmu input kodemu.`);
-          }
-        } catch (err) {
-          showToast('Gagal menghubungkan: ' + err.message);
+        if (!partnerSnap.exists()) {
+          showToast('Kode teman tidak ditemukan. Pastikan temanmu sudah klik Daftar Baru.');
+          return;
         }
-        return;
+
+        const partnerData = partnerSnap.data();
+        if (partnerData.roomId && partnerData.targetCode !== state.user.myCode) {
+          showToast('Kode temanmu sudah terkunci dengan akun lain!');
+          return;
+        }
+
+        const myCodeRef = doc(db, 'codes', state.user.myCode);
+        await updateDoc(myCodeRef, { targetCode: inputCode });
+
+        if (partnerData.targetCode === state.user.myCode) {
+          const roomId = [state.user.uid, partnerData.uid].sort().join('_');
+          await setDoc(doc(db, 'rooms', roomId), {
+            members: [state.user.uid, partnerData.uid],
+            locked: true,
+            feed: [{
+              time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+              text: `🔒 ${state.user.name} & ${partnerData.name} resmi terhubung berdua di Stiti.id!`
+            }]
+          }, { merge: true });
+
+          await updateDoc(myCodeRef, { roomId, partnerUid: partnerData.uid });
+          await updateDoc(partnerCodeRef, { roomId, partnerUid: state.user.uid });
+        } else {
+          document.getElementById('partner-ack-text').textContent =
+            `Kode ${partnerData.name} valid! Menunggu ${partnerData.name} memasukkan kodemu (${state.user.myCode})...`;
+          showToast(`Kode ${partnerData.name} cocok! Tunggu temanmu input kodemu.`);
+        }
+      } catch (err) {
+        showToast('Gagal menghubungkan: ' + err.message);
       }
-
-      state.user.partnerCode = inputCode;
-      state.partner.code = inputCode;
-      state.user.paired = true;
-      currentWisdomIndex = Math.floor(Math.random() * WISDOM_QUOTES.length);
-      renderWisdomCard();
-      state.step = 'welcome';
-      await saveUserState();
-      renderScreens();
-      showToast('Berhasil terhubung berdua! Simak pengingat sebelum masuk.');
     }
 
-    function simulateFullPairing() {
-      const dummyPartnerCode = generateSecretCode();
-      document.getElementById('input-partner-code').value = dummyPartnerCode;
-      submitPartnerCode();
-    }
+    function simulateFullPairing() {}
 
     async function logoutUser() {
       if (!confirm('Keluar dari akun saat ini?')) return;
-      if (USE_FIREBASE) {
-        cleanupListeners();
-        await signOut(auth);
-      } else {
-        localStorage.removeItem('stiti_id_v2_state');
-        location.reload();
-      }
+      cleanupListeners();
+      await signOut(auth);
     }
 
     // =========================================================================
-    // MESIN KEUANGAN: PERIODE TANGGAL, AUTO-SPLIT, PENGELUARAN & KOREKSI
+    // MESIN KEUANGAN, GRAFIK, EVALUASI & RENDER
     // =========================================================================
     let modalTxType = 'OUT';
     let modalTxWallet = 'qris';
@@ -1935,7 +1735,6 @@
       renderApp();
     }
 
-    // Modal Atur Tanggal Periode
     function openPeriodModal() {
       document.getElementById('period-modal-start').value = state.user.period?.startDate || new Date().toISOString().slice(0, 10);
       document.getElementById('period-modal-end').value = state.user.period?.endDate || addDaysISO(null, 14);
@@ -1964,7 +1763,6 @@
       showToast('Tanggal periode anggaran diperbarui!');
     }
 
-    // Koreksi Saldo Cepat
     function openReconcileModal(walletKey) {
       state.reconcileTarget = walletKey;
       document.getElementById('reconcile-title').textContent =
@@ -1987,12 +1785,8 @@
       showToast('Saldo fisik berhasil disamakan!');
     }
 
-    // =========================================================================
-    // KUSTOMISASI AMPLOP (OTOMATIS HITUNG ULANG RUPIAH) & PRIVASI GANDA
-    // =========================================================================
     function toggleScreenMask() {
       state.maskScreen = !state.maskScreen;
-      if (!USE_FIREBASE) localStorage.setItem('stiti_id_v2_state', JSON.stringify(state));
       renderApp();
       showToast(state.maskScreen ? 'Layar disensor (Mode Aman).' : 'Nominal ditampilkan.');
     }
@@ -2006,7 +1800,6 @@
 
     function toggleDemoPartnerPrivacy() {
       state.partner.shareNominal = !state.partner.shareNominal;
-      saveUserState();
       renderApp();
     }
 
@@ -2032,7 +1825,6 @@
       showToast('Catatan terkirim!');
     }
 
-    // Editor Kustomisasi Amplop dengan Perhitungan Ulang Otomatis
     let draftEnvelopes = [];
 
     function getActiveBudgetPool() {
@@ -2129,7 +1921,6 @@
 
     async function saveEnvelopeConfig() {
       const pool = getActiveBudgetPool();
-      // Otomatis hitung ulang nominal allocated setiap amplop sesuai persentase baru!
       draftEnvelopes.forEach(env => {
         env.allocated = Math.round((pool * (Number(env.pct) || 0)) / 100);
       });
@@ -2141,7 +1932,6 @@
         : 'Porsi disimpan! Akan langsung membagi otomatis saat uang masuk.');
     }
 
-    // Export Laporan Excel (.xlsx) Multi-Sheet via SheetJS
     function exportToExcel() {
       if (typeof XLSX === 'undefined') {
         showToast('Library Excel belum termuat, pastikan koneksi internet aktif.');
@@ -2174,11 +1964,7 @@
       showToast(`Rekap Excel (${monthName}) berhasil diunduh!`);
     }
 
-    // =========================================================================
-    // RENDER GRAFIK VISUAL & EVALUASI OTOMATIS
-    // =========================================================================
     function renderVisualCharts() {
-      // 1. Donut Chart Komposisi 4 Amplopku
       const donutSvg = document.getElementById('my-donut-svg');
       const legendEl = document.getElementById('donut-legend');
       const radius = 58;
@@ -2211,7 +1997,6 @@
         `;
       }).join('');
 
-      // 2. Grafik Batang Perbandingan Berdua (Kamu vs Teman)
       const compEl = document.getElementById('comparison-bar-chart');
       const maxLen = Math.max(state.user.envelopes.length, state.partner.envelopes.length);
       let barsHTML = '';
@@ -2255,7 +2040,6 @@
     function renderEvaluationDashboard() {
       const totalAlloc = state.user.envelopes.reduce((s, e) => s + e.allocated, 0);
       const totalSpent = state.user.envelopes.reduce((s, e) => s + e.spent, 0);
-      const totalSisa = Math.max(0, totalAlloc - totalSpent);
 
       const startISO = state.user.period?.startDate || new Date().toISOString().slice(0, 10);
       const endISO = state.user.period?.endDate || addDaysISO(startISO, 14);
@@ -2275,12 +2059,10 @@
       const badMessages = [];
       let score = 80;
 
-      // Evaluasi 1: Apakah sudah ada uang masuk?
       if (totalAlloc === 0) {
         score = 65;
         badMessages.push('Belum ada pemasukan tercatat di periode aktif. Segera catat uang sakumu (misal Rp500.000 untuk 2 minggu) agar analisis harian berjalan akurat.');
       } else {
-        // Evaluasi 2: Amplop Masa Depan (Clason)
         const futureEnv = state.user.envelopes.find(e => e.name.toLowerCase().includes('masa depan') || e.id === 'env_masadepan');
         if (futureEnv) {
           if (futureEnv.spent === 0 && futureEnv.allocated > 0) {
@@ -2292,7 +2074,6 @@
           }
         }
 
-        // Evaluasi 3: Laju pengeluaran harian vs batas aman harian
         if (currentDailyBurn <= safeDailyLimit) {
           score += 8;
           goodMessages.push(`Ritme belanjamu sehat! Rata-rata pengeluaran (${formatRp(currentDailyBurn)}/hari) masih di bawah batas aman (${formatRp(safeDailyLimit)}/hari).`);
@@ -2301,7 +2082,6 @@
           badMessages.push(`Laju belanja terlalu cepat (${formatRp(currentDailyBurn)}/hari vs batas aman ${formatRp(safeDailyLimit)}/hari). Sisa ${remainingDays} hari ke depan perlu pengetatan.`);
         }
 
-        // Evaluasi 4: Cek tiap amplop yang kritis (< 25%) atau sangat aman (> 60%)
         state.user.envelopes.forEach(env => {
           if (env.allocated <= 0) return;
           const pctLeft = Math.round(((env.allocated - env.spent) / env.allocated) * 100);
@@ -2314,7 +2094,6 @@
         });
       }
 
-      // Evaluasi 5: Streak Konsistensi
       if (state.user.streak >= 3) {
         score += 5;
         goodMessages.push(`Disiplin pencatatan aktif selama ${state.user.streak} hari! Kebiasaan mencatat mencegah kebocoran uang receh.`);
@@ -2354,15 +2133,11 @@
       `).join('');
     }
 
-    // =========================================================================
-    // NAVIGASI TAB & RENDER UTAMA
-    // =========================================================================
     function switchTab(tabName) {
       const tabs = ['berdua', 'dompetku', 'evaluasi', 'teman', 'atur'];
       tabs.forEach(v => {
         document.getElementById('view-' + v).classList.toggle('hidden', v !== tabName);
 
-        // Mobile Nav
         const mNav = document.getElementById('nav-' + v);
         if (mNav) {
           mNav.className = v === tabName
@@ -2370,7 +2145,6 @@
             : 'nav-item flex flex-col items-center gap-0.5 px-2 py-1 text-slate-400 tactile-btn';
         }
 
-        // Desktop Sidebar Nav
         const dNav = document.getElementById('dnav-' + v);
         if (dNav) {
           dNav.className = v === tabName
@@ -2413,14 +2187,12 @@
     }
 
     function renderScreens() {
-      ['auth', 'verify', 'pairing', 'welcome', 'app'].forEach(s => {
+      ['auth', 'pairing', 'welcome', 'app'].forEach(s => {
         document.getElementById('screen-' + s).classList.toggle('hidden', state.step !== s);
       });
 
-      if (state.step === 'verify') {
-        document.getElementById('verify-email-display').textContent = state.user.email;
-      } else if (state.step === 'pairing') {
-        document.getElementById('my-pairing-code').textContent = state.user.myCode;
+      if (state.step === 'pairing') {
+        document.getElementById('my-pairing-code').textContent = state.user.myCode || '------';
       } else if (state.step === 'welcome') {
         document.getElementById('welcome-user-subtitle').textContent =
           `Halo ${state.user.name || 'Kawan'} & ${state.partner.name} • Jaga ritme, kawal masa depan`;
@@ -2431,7 +2203,6 @@
     }
 
     function renderApp() {
-      // Cek Peringatan Akhir Bulan (Tanggal 25 ke atas atau mode simulasi)
       const now = new Date();
       const isEndOfMonth = now.getDate() >= 25 || state.forceEomBanner;
       const eomBanner = document.getElementById('eom-banner');
@@ -2439,7 +2210,6 @@
       document.getElementById('eom-month-label').textContent =
         now.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
 
-      // Header & Sidebar Info
       document.getElementById('header-greeting').textContent = `${state.user.name} & ${state.partner.name}`;
       document.getElementById('header-streak').textContent = `🔥 ${state.user.streak} Hari`;
       document.getElementById('sidebar-streak').textContent = `🔥 ${state.user.streak} Hari Konsisten`;
@@ -2452,7 +2222,6 @@
         ? `<svg class="w-4 h-4 text-neon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>`
         : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`;
 
-      // Periode Anggaran Aktif
       const pStart = state.user.period?.startDate;
       const pEnd = state.user.period?.endDate;
       const pDays = getDaysBetween(pStart, pEnd);
@@ -2466,11 +2235,9 @@
       document.getElementById('period-date-range').textContent = `${formatShortDateID(pStart)} — ${formatShortDateID(pEnd)}`;
       document.getElementById('period-daily-limit').textContent = `${formatRp(dailySafe)} / hari`;
 
-      // Render Visual Charts & Evaluasi
       renderVisualCharts();
       renderEvaluationDashboard();
 
-      // Tab 1: Berdua
       document.getElementById('dash-my-name').textContent = `Amplop ${state.user.name}`;
       document.getElementById('dash-partner-name').textContent = `Amplop ${state.partner.name}`;
       document.getElementById('dash-partner-privacy-badge').textContent = state.partner.shareNominal ? 'Mode Terbuka (Rp)' : 'Mode Privasi (%)';
@@ -2490,7 +2257,6 @@
         </div>
       `).join('');
 
-      // Tab 2: Dompetku
       document.getElementById('wallet-qris-bal').textContent = formatRp(state.user.wallets.qris);
       document.getElementById('wallet-cash-bal').textContent = formatRp(state.user.wallets.cash);
 
@@ -2538,16 +2304,11 @@
             `;
           }).join('');
 
-      // Tab 4: Teman
       document.getElementById('partner-page-name').textContent = state.partner.name;
       document.getElementById('partner-code-label').textContent = state.partner.code;
       document.getElementById('partner-streak-badge').textContent = `🔥 ${state.partner.streak} Hari`;
-      document.getElementById('btn-demo-partner-privacy').textContent = state.partner.shareNominal
-        ? 'Mode Terbuka (Lihat Rp)'
-        : 'Privasi Aktif (Hanya %)';
       document.getElementById('partner-detailed-envelopes').innerHTML = renderEnvelopeBars(state.partner.envelopes, state.partner.shareNominal, false);
 
-      // Tab 5: Pengaturan
       document.getElementById('settings-my-code').textContent = state.user.myCode || '------';
       document.getElementById('settings-partner-info').textContent = `${state.partner.name} (${state.partner.code || '------'})`;
 
@@ -2566,12 +2327,9 @@
       }
     }
 
-    // Daftarkan seluruh handler ke window agar dapat diakses atribut HTML
     Object.assign(window, {
       switchAuthMode,
       handleAuthSubmit,
-      checkEmailVerification,
-      resendVerificationEmail,
       copyMyCode,
       submitPartnerCode,
       simulateFullPairing,
@@ -2608,11 +2366,6 @@
       saveEnvelopeConfig,
       exportToExcel
     });
-
-    if (!USE_FIREBASE) {
-      loadLocalState();
-      renderScreens();
-    }
   </script>
 </body>
 </html>
